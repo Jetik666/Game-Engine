@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\App">
+      <UniqueIdentifier>{cbe5ed08-38e2-42e6-bb8c-a18d0f88f176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exception">
+      <UniqueIdentifier>{5eea20fd-3023-4d66-89d7-718c31379c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{5369206e-5406-4dbf-9c87-0957f196f8a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input Controls">
+      <UniqueIdentifier>{ba31931e-53bf-45da-98d7-9ecd5a1830f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Image">
+      <UniqueIdentifier>{4826d59b-a38d-40bd-bd81-afa2d0d4d28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Image\Icon">
+      <UniqueIdentifier>{bd6b7c3e-a04f-46a2-b71a-a4ed0465710e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\App">
+      <UniqueIdentifier>{3165a8ea-9193-482c-9bf5-699706f3c217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exception">
+      <UniqueIdentifier>{dc0e1a8a-5b63-42b7-b9bf-0b494ef6f202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{a4638bf9-180f-4c99-a557-25cc3dc0095e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input Controls">
+      <UniqueIdentifier>{794ef189-857f-4b44-810f-f16c2f27957f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>Source Files\Input Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Source Files\Input Controls</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Header Files\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files\Input Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Header Files\Input Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="image\icon\manager16.ico">
+      <Filter>Resource Files\Image\Icon</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
