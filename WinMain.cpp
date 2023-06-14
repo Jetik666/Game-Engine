@@ -42,7 +42,7 @@
 
 #define STRICT
 
-#include "App.h"
+#include "App/App.h"
 
 int CALLBACK WinMain(
 	HINSTANCE hInstance,
