@@ -1,6 +1,5 @@
+#pragma region __TARGET__
 #define _WIN32_WINNT 0x0601
-
-#include <Windows.h>
 #include <sdkddkver.h>
 // The following #defines disable a bunch of unused windows stuff. If you 
 // get weird errors when trying to do some windows stuff, try removing some
@@ -41,6 +40,9 @@
 #define NOTAPE
 
 #define STRICT
+#pragma endregion
+
+#include <Windows.h>
 
 #include "App/App.h"
 
