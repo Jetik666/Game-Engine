@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include "resource.h"
+#include "Resource.h"
 
 // Window Class
 Window::WindowClass Window::WindowClass::wndClass;
