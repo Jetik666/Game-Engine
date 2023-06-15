@@ -5,10 +5,10 @@
 #include "../resource.h"
 
 // Window Class
-Window::WindowClass Window::WindowClass::wndClass;
+Window::WindowClass Window::WindowClass::pWndClass;
 
 // Register window class
-Window::WindowClass::WindowClass() noexcept : hInst(GetModuleHandle(nullptr))
+Window::WindowClass::WindowClass() noexcept : pHINST(GetModuleHandle(nullptr))
 {
 	WNDCLASSEX wc = { 0 };
 	wc.cbSize = sizeof(wc);
@@ -17,32 +17,32 @@ Window::WindowClass::WindowClass() noexcept : hInst(GetModuleHandle(nullptr))
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
 	wc.hInstance = GetInstance();
-	wc.hIcon = static_cast<HICON>(LoadImage(hInst, MAKEINTRESOURCE(IDI_ICON), IMAGE_ICON, 32, 32, 0));
+	wc.hIcon = static_cast<HICON>(LoadImage(pHINST, MAKEINTRESOURCE(IDI_ICON), IMAGE_ICON, 32, 32, 0));
 	wc.hCursor = nullptr;
 	wc.hbrBackground = nullptr;
 	wc.lpszMenuName = nullptr;
 	wc.lpszClassName = GetName();
-	wc.hIconSm = static_cast<HICON>(LoadImage(hInst, MAKEINTRESOURCE(IDI_ICON), IMAGE_ICON, 16, 16, 0));
+	wc.hIconSm = static_cast<HICON>(LoadImage(pHINST, MAKEINTRESOURCE(IDI_ICON), IMAGE_ICON, 16, 16, 0));
 	RegisterClassEx(&wc);
 }
 
 Window::WindowClass::~WindowClass()
 {
-	UnregisterClass(wndClassName, GetInstance());
+	UnregisterClass(pWndClassName, GetInstance());
 }
 
 const char* Window::WindowClass::GetName() noexcept
 {
-	return wndClassName;
+	return pWndClassName;
 }
 
 HINSTANCE Window::WindowClass::GetInstance() noexcept
 {
-	return wndClass.hInst;
+	return pWndClass.pHINST;
 }
 
 // Window Stuff
-Window::Window(int width, int height, const char* name) noexcept : width(width), height(height)
+Window::Window(int width, int height, const char* name) noexcept : pWidth(width), pHeight(height)
 {
 	// Calculate window size based on desired client region size
 	RECT wr{};
@@ -56,32 +56,32 @@ Window::Window(int width, int height, const char* name) noexcept : width(width),
 	}
 
 	// Create window & get hWnd
-	hWnd = CreateWindow(
+	pHWND = CreateWindow(
 		WindowClass::GetName(), name,
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
 		CW_USEDEFAULT, CW_USEDEFAULT, wr.right - wr.left, wr.bottom - wr.top,
 		nullptr, nullptr, WindowClass::GetInstance(), this
 	);
 
-	if (hWnd == nullptr)
+	if (pHWND == nullptr)
 	{
 		throw CHWND_LAST_EXCEPT();
 	}
 
 	// Show Window
-	ShowWindow(hWnd, SW_SHOWDEFAULT);
+	ShowWindow(pHWND, SW_SHOWDEFAULT);
 	// create graphics object
-	pGfx = std::make_unique<Graphics>(hWnd);
+	pGfx = std::make_unique<Graphics>(pHWND);
 }
 
 Window::~Window()
 {
-	DestroyWindow(hWnd);
+	DestroyWindow(pHWND);
 }
 
 void Window::SetTitle(const std::string& title)
 {
-	if (SetWindowText(hWnd, title.c_str()) == 0)
+	if (SetWindowText(pHWND, title.c_str()) == 0)
 	{
 		throw CHWND_LAST_EXCEPT();
 	}
@@ -111,11 +111,15 @@ std::optional<int> Window::ProcessMessages()
 
 HWND Window::GetHWND() noexcept
 {
-	return hWnd;
+	return pHWND;
 }
 
 Graphics& Window::Gfx() 
 {
+	if (!pGfx)
+	{
+		throw CHWND_NOGFX_EXCEPT();
+	}
 	return *pGfx;
 }
 
@@ -190,7 +194,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_MOUSEMOVE: {
 		const POINTS pt = MAKEPOINTS(lParam);
 		// In client region -> log move and log enter + capture mouse (if not previously in window)
-		if (pt.x >= 0 && pt.x < width && pt.y >= 0 && pt.y < height) 
+		if (pt.x >= 0 && pt.x < pWidth && pt.y >= 0 && pt.y < pHeight) 
 		{
 			mouse.OnMouseMove(pt.x, pt.y);
 			if (!mouse.IsInWindow()) {
@@ -232,7 +236,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftReleased(pt.x, pt.y);
 		// Release mouse if outside of window
-		if (pt.x < 0 || pt.x >= width || pt.y < 0 || pt.y >= height) 
+		if (pt.x < 0 || pt.x >= pWidth || pt.y < 0 || pt.y >= pHeight) 
 		{
 			ReleaseCapture();
 			mouse.OnMouseLeave();
@@ -244,7 +248,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightReleased(pt.x, pt.y);
 		// Release mouse if outside of window
-		if (pt.x < 0 || pt.x >= width || pt.y < 0 || pt.y >= height)
+		if (pt.x < 0 || pt.x >= pWidth || pt.y < 0 || pt.y >= pHeight)
 		{
 			ReleaseCapture();
 			mouse.OnMouseLeave();
@@ -267,29 +271,11 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 }
 
 // Window Exception Stuff
-Window::Exception::Exception(int line, const char* file, HRESULT hr) noexcept : GameException(line, file), hr(hr) {}
-
-const char* Window::Exception::what() const noexcept
-{
-	std::ostringstream oss;
-	oss << GetType() << std::endl
-		<< "[Error Code] " << GetErrorCode() << std::endl
-		<< "[Description] " << GetErrorString() << std::endl
-		<< GetOriginString();
-	whatBuffer = oss.str();
-	return whatBuffer.c_str();
-}
-
-const char* Window::Exception::GetType() const noexcept
-{
-	return "Game Window Exception";
-}
-
 std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept
 {
 	char* pMsgBuf = nullptr;
-	// Windows will allocate memory for err string and make our pointer point to it
-	DWORD nMsgLen = FormatMessage(
+	// windows will allocate memory for err string and make our pointer point to it
+	const DWORD nMsgLen = FormatMessage(
 		FORMAT_MESSAGE_ALLOCATE_BUFFER |
 		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 		nullptr, hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
@@ -300,20 +286,49 @@ std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept
 	{
 		return "Unidentified error code";
 	}
-
-	// Copy error string from windows-allocated buffer to std::string
+	// copy error string from windows-allocated buffer to std::string
 	std::string errorString = pMsgBuf;
-	// Free windows buffer
+	// free windows buffer
 	LocalFree(pMsgBuf);
 	return errorString;
 }
 
-HRESULT Window::Exception::GetErrorCode() const noexcept
+
+Window::HrException::HrException(int line, const char* file, HRESULT hr) noexcept
+	:
+	Exception(line, file),
+	pHR(hr)
+{}
+
+const char* Window::HrException::what() const noexcept
 {
-	return hr;
+	std::ostringstream oss;
+	oss << GetType() << std::endl
+		<< "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
+		<< std::dec << " (" << (unsigned long)GetErrorCode() << ")" << std::endl
+		<< "[Description] " << GetErrorDescription() << std::endl
+		<< GetOriginString();
+	whatBuffer = oss.str();
+	return whatBuffer.c_str();
 }
 
-std::string Window::Exception::GetErrorString() const noexcept
+const char* Window::HrException::GetType() const noexcept
 {
-	return TranslateErrorCode(hr);
+	return "Chili Window Exception";
+}
+
+HRESULT Window::HrException::GetErrorCode() const noexcept
+{
+	return pHR;
+}
+
+std::string Window::HrException::GetErrorDescription() const noexcept
+{
+	return Exception::TranslateErrorCode(pHR);
+}
+
+
+const char* Window::NoGfxException::GetType() const noexcept
+{
+	return "Game Window Exception [No Graphics]";
 }

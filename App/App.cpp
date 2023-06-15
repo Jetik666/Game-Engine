@@ -17,10 +17,10 @@ int App::Go()
 		{
 			DoFrame();
 			wnd.SetTitle(
-				"Nigger " + std::to_string(timer.Peek()) + " ms" +
+				"Nigger " + std::to_string(timer.Peek()) + " s" +
 				" All Frames: " + std::to_string(timer.GetFrames()) +
 				" FPS: " + std::to_string(timer.GetCurrentFPS()) +
-				" Time per frame: " + std::to_string(timer.GetTimePerFrame()) + " ms"
+				" Time per frame: " + std::to_string(timer.GetTimePerFrame() * 1000) + " ms"
 			);
 		}
 	}

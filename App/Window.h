@@ -13,15 +13,28 @@ class Window
 public:
 	class Exception : public GameException
 	{
+		using GameException::GameException;
 	public:
-		Exception(int line, const char* file, HRESULT hr) noexcept;
-		const char* what() const noexcept override;
-		virtual const char* GetType() const noexcept;
 		static std::string TranslateErrorCode(HRESULT hr) noexcept;
+	};
+
+	class HrException : public Exception
+	{
+	public:
+		HrException(int line, const char* file, HRESULT hr) noexcept;
+		const char* what() const noexcept override;
+		const char* GetType() const noexcept override;
 		HRESULT GetErrorCode() const noexcept;
-		std::string GetErrorString() const noexcept;
+		std::string GetErrorDescription() const noexcept;
 	private:
-		HRESULT hr;
+		HRESULT pHR;
+	};
+
+	class NoGfxException : public Exception
+	{
+	public:
+		using Exception::Exception;
+		const char* GetType() const noexcept override;
 	};
 private:
 	// singleton manages registration/cleanup of window class
@@ -35,9 +48,9 @@ private:
 		~WindowClass() noexcept;
 		WindowClass(const WindowClass&) = delete;
 		WindowClass& operator = (const WindowClass&) = delete;
-		static constexpr const char* wndClassName = "Game";
-		static WindowClass wndClass;
-		HINSTANCE hInst;
+		static constexpr const char* pWndClassName = "Game";
+		static WindowClass pWndClass;
+		HINSTANCE pHINST;
 	};
 public:
 	Window(int width, int height, const char* name) noexcept;
@@ -56,12 +69,13 @@ public:
 	Keyboard kbd;
 	Mouse mouse;
 private:
-	int width;
-	int height;
-	HWND hWnd;
+	int pWidth;
+	int pHeight;
+	HWND pHWND;
 	std::unique_ptr<Graphics> pGfx;
 };
 
 // error exception helper macro
-#define CHWND_EXCEPT(hr) Window::Exception(__LINE__, __FILE__, hr)
-#define CHWND_LAST_EXCEPT() Window::Exception(__LINE__, __FILE__, GetLastError())
+#define CHWND_EXCEPT(hr) Window::HrException(__LINE__, __FILE__, (hr))
+#define CHWND_LAST_EXCEPT() Window::HrException(__LINE__, __FILE__, GetLastError())
+#define CHWND_NOGFX_EXCEPT() Window::NoGfxException(__LINE__, __FILE__)
