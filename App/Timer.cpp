@@ -23,7 +23,7 @@ int Timer::GetCurrentFPS() noexcept
 {
 	mTimePerFrame = Mark();
 
-	mFrames += 1.0f / mTimePerFrame;
+	mFrames += int(1.0f / mTimePerFrame);
 	return static_cast<int>(1.0f / mTimePerFrame);
 }
 
