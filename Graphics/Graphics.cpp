@@ -99,7 +99,7 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 }
 
 // Create triangle
-void Graphics::DrawTestTrianlge()
+void Graphics::DrawTestTrianlge(float angle)
 {
 	HRESULT hr;
 
@@ -118,6 +118,8 @@ void Graphics::DrawTestTrianlge()
 			unsigned char a;
 		} color;
 	};
+
+	// Create vertex buffer
 	Vertex vertices[] =
 	{
 		{0.0f, 0.5f, 255, 0, 0, 0},
@@ -125,11 +127,11 @@ void Graphics::DrawTestTrianlge()
 		{-0.5f, -0.5f, 0, 0, 255, 0},
 		{-0.3f, 0.3f, 0, 255, 0, 0},
 		{0.3f, 0.3f, 0, 0, 255, 0},
-		{0.0f, -0.8f, 255, 0 ,0, 0},
+		{0.0f, -1.0f, 255, 0 ,0, 0},
 	};
 	Microsoft::WRL::ComPtr<ID3D11Buffer> pVertexBuffer;
 
-	D3D11_BUFFER_DESC bd = {};
+	D3D11_BUFFER_DESC bd{};
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.Usage = D3D11_USAGE_DEFAULT;
 	bd.CPUAccessFlags = 0u;
@@ -151,7 +153,7 @@ void Graphics::DrawTestTrianlge()
 		2, 1, 5,
 	};
 	Microsoft::WRL::ComPtr<ID3D11Buffer> pIndexBuffer;
-	D3D11_BUFFER_DESC ibd = {};
+	D3D11_BUFFER_DESC ibd{};
 	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	ibd.Usage = D3D11_USAGE_DEFAULT;
 	ibd.CPUAccessFlags = 0u;
@@ -162,8 +164,41 @@ void Graphics::DrawTestTrianlge()
 	isd.pSysMem = indices;
 	GFX_THROW_INFO(pDevice->CreateBuffer(&ibd, &isd, &pIndexBuffer));
 
-	// Binde index buffer
+	// Bind index buffer
 	pContext->IASetIndexBuffer(pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u);
+
+	// Create Constant Buffer for transformation matrix
+	struct ConstantBuffer
+	{
+		struct
+		{
+			float element[4][4];
+		} transformation;
+	};
+
+	const ConstantBuffer cb =
+	{
+		{
+			 (3.0f / 4.0f) * std::cos(angle),  std::sin(angle), 0.0f, 0.0f,
+			 (3.0f / 4.0f) * -std::sin(angle), std::cos(angle), 0.0f, 0.0f,
+			 0.0f,							   0.0f,            1.0f, 0.0f,
+			 0.0f,							   0.0f,            0.0f, 1.0f,
+		}
+	};
+	Microsoft::WRL::ComPtr<ID3D11Buffer> pConstantBuffer;
+	D3D11_BUFFER_DESC cbd{};
+	cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	cbd.Usage = D3D11_USAGE_DYNAMIC;
+	cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	cbd.MiscFlags = 0u;
+	cbd.ByteWidth = sizeof(cb);
+	cbd.StructureByteStride = 0u;
+	D3D11_SUBRESOURCE_DATA csd = {};
+	csd.pSysMem = &cb;
+	GFX_THROW_INFO(pDevice->CreateBuffer(&cbd, &csd, &pConstantBuffer));
+
+	// Bind constant buffer to vertex shader
+	pContext->VSSetConstantBuffers(0u, 1u, pConstantBuffer.GetAddressOf());
 
 	// Bind vertex buffer to pipeline
 	const UINT stride = sizeof(Vertex);
@@ -210,7 +245,7 @@ void Graphics::DrawTestTrianlge()
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> pInputLayout;
 	const D3D11_INPUT_ELEMENT_DESC ied[] =
 	{
-		{"POSITION", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"Pubes", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
 		{"Color", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, 8u, D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 	GFX_THROW_INFO(pDevice->CreateInputLayout(
@@ -230,7 +265,7 @@ void Graphics::DrawTestTrianlge()
 	pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// Configure viewport
-	D3D11_VIEWPORT vp;
+	D3D11_VIEWPORT vp{};
 	vp.Width = 800;
 	vp.Height = 600;
 	vp.MinDepth = 0;
