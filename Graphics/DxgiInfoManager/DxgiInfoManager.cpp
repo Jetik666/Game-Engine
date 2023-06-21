@@ -3,12 +3,12 @@
 #include <dxgidebug.h>
 #include <memory>
 
-#include "../App/Window.h"
-#include "Graphics.h"
+#include "../../App/Window/Window.h"
+#include "../../App/Window/WindowThrowMacros.h"
+#include "../Graphics.h"
+#include "../GraphicsThrowMacros.h"
 
 #pragma comment(lib, "dxguid.lib")
-
-#define GFX_THROW_NOINFO(hrcall) if( FAILED( hr = (hrcall) ) ) throw Graphics::HrException( __LINE__,__FILE__,hr )
 
 DxgiInfoManager::DxgiInfoManager()
 {

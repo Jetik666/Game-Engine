@@ -1,6 +1,11 @@
 #include "App.h"
+#include <memory>
 
-App::App() : wnd(800, 600, "Nigger") {}
+App::App() : wnd(800, 600, "Nigger") 
+{
+	std::mt19937 rng(std::random_device{}());
+	std::uniform_real_distribution<float>
+}
 
 int App::Go() 
 {

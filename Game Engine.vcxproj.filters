@@ -51,10 +51,10 @@
     <ClCompile Include="App\App.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="App\Timer.cpp">
+    <ClCompile Include="App\Timer\Timer.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="App\Window.cpp">
+    <ClCompile Include="App\Window\Window.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
     <ClCompile Include="Exception\Exception.cpp">
@@ -69,13 +69,13 @@
     <ClCompile Include="Input Controls\Mouse.cpp">
       <Filter>Source Files\Input Controls</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\DxgiInfoManager.cpp">
+    <ClCompile Include="Graphics\DxgiInfoManager\DxgiInfoManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Exception\dxerr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App\WindowsMessageMap.cpp">
+    <ClCompile Include="App\Window\WindowsMessageMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,10 +88,10 @@
     <ClInclude Include="App\App.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="App\Timer.h">
+    <ClInclude Include="App\Timer\Timer.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="App\Window.h">
+    <ClInclude Include="App\Window\Window.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
     <ClInclude Include="Exception\Exception.h">
@@ -109,13 +109,19 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\DxgiInfoManager.h">
+    <ClInclude Include="Graphics\DxgiInfoManager\DxgiInfoManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Exception\dxerr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="App\WindowsMessageMap.h">
+    <ClInclude Include="App\Window\WindowsMessageMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Window\WindowThrowMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GraphicsThrowMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -136,7 +142,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\VertexShader.hlsl" />
-    <FxCompile Include="Shader\PixelShader.hlsl" />
+    <FxCompile Include="Graphics\Shader\VertexShader.hlsl" />
+    <FxCompile Include="Graphics\Shader\PixelShader.hlsl" />
   </ItemGroup>
 </Project>

@@ -4,10 +4,10 @@
 #include <optional>
 #include <memory>
 
-#include "../Exception/Exception.h"
-#include "../Input Controls/Keyboard.h"
-#include "../Input Controls/Mouse.h"
-#include "../Graphics/Graphics.h"
+#include "../../Exception/Exception.h"
+#include "../../Input Controls/Keyboard.h"
+#include "../../Input Controls/Mouse.h"
+#include "../../Graphics/Graphics.h"
 
 class Window
 {
@@ -60,7 +60,6 @@ public:
 	Window& operator = (const Window&) = delete;
 	void SetTitle(const std::string& title);
 	static std::optional<int> ProcessMessages();
-	HWND GetHWND() noexcept;
 	Graphics& Gfx();
 private:
 	static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
@@ -75,8 +74,3 @@ private:
 	HWND pHWND;
 	std::unique_ptr<Graphics> pGfx;
 };
-
-// error exception helper macro
-#define CHWND_EXCEPT(hr) Window::HrException(__LINE__, __FILE__, (hr))
-#define CHWND_LAST_EXCEPT() Window::HrException(__LINE__, __FILE__, GetLastError())
-#define CHWND_NOGFX_EXCEPT() Window::NoGfxException(__LINE__, __FILE__)

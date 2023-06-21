@@ -2,7 +2,8 @@
 
 #include <sstream>
 
-#include "../resource.h"
+#include "../../Resources/resource.h"
+#include "WindowThrowMacros.h"
 
 // Window Class
 Window::WindowClass Window::WindowClass::pWndClass;
@@ -107,11 +108,6 @@ std::optional<int> Window::ProcessMessages()
 
 	// Return empty optional when not quitting app
 	return {};
-}
-
-HWND Window::GetHWND() noexcept
-{
-	return pHWND;
 }
 
 Graphics& Window::Gfx() 

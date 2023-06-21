@@ -2,14 +2,18 @@
 
 #include <Windows.h>
 #include <d3d11.h>
+#include <DirectXMath.h>
 #include <wrl.h>
 #include <vector>
+#include <memory>
+#include <random>
 
 #include "../Exception/Exception.h"
-#include "DxgiInfoManager.h"
+#include "DxgiInfoManager/DxgiInfoManager.h"
 
 class Graphics
 {
+	friend class Bindable;
 public: 
 	class Exception : public GameException
 	{
@@ -58,9 +62,11 @@ public:
 	~Graphics() = default;
 	void EndFrame();
 	void ClearBuffer(float red, float green, float blue) noexcept;
-	void DrawTestTrianlge(float angle, float x, float z);
-
+	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
+	void SetProjection(DirectX::FXMMATRIX projection) noexcept;
+	DirectX::XMMATRIX GetProjection() const noexcept;
 private:
+	DirectX::XMMATRIX pProjection;
 #ifndef NDEBUG
 	DxgiInfoManager pInfoManager;
 #endif // !NDEBUG
