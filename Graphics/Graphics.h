@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <d3d11.h>
+#include <d3dcompiler.h>
 #include <DirectXMath.h>
 #include <wrl.h>
 #include <vector>
@@ -33,7 +34,7 @@ public:
 
 	private:
 		HRESULT hr;
-		std::string pInfo;
+		std::string info;
 	};
 
 	class InfoException : public Exception
@@ -53,7 +54,7 @@ public:
 	public:
 		const char* GetType() const noexcept override;
 	private:
-		std::string pReason;
+		std::string reason;
 	};
 public:
 	Graphics(HWND hWnd);
@@ -63,12 +64,12 @@ public:
 	void EndFrame();
 	void ClearBuffer(float red, float green, float blue) noexcept;
 	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
-	void SetProjection(DirectX::FXMMATRIX projection) noexcept;
+	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
 private:
-	DirectX::XMMATRIX pProjection;
+	DirectX::XMMATRIX projection;
 #ifndef NDEBUG
-	DxgiInfoManager pInfoManager;
+	DxgiInfoManager infoManager;
 #endif // !NDEBUG
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;

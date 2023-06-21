@@ -13,7 +13,7 @@ ID3D11Device* Bindable::GetDevice(Graphics& gfx) noexcept
 DxgiInfoManager& Bindable::GetInfoManager(Graphics& gfx) noexcept(!IS_DEBUG)
 {
 #ifndef NDEBUG
-	return gfx.pInfoManager;
+	return gfx.infoManager;
 #else
 	throw std::logic_error("YOUFOKEDUP");
 #endif

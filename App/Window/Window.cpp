@@ -110,6 +110,11 @@ std::optional<int> Window::ProcessMessages()
 	return {};
 }
 
+HWND Window::GetHWND()
+{
+	return pHWND;
+}
+
 Graphics& Window::Gfx() 
 {
 	if (!pGfx)

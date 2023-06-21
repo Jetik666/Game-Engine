@@ -106,7 +106,7 @@ void Graphics::EndFrame()
 {
 	HRESULT hr;
 #ifndef NDEBUG
-	pInfoManager.Set();
+	infoManager.Set();
 #endif
 	if (FAILED(hr = pSwap->Present(1u, 0u)))
 	{
@@ -133,14 +133,14 @@ void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
 	GFX_THROW_INFO_ONLY(pContext->DrawIndexed(count, 0u, 0u));
 }
 
-void Graphics::SetProjection(DirectX::FXMMATRIX projection) noexcept
+void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
 {
-	pProjection = projection;
+	projection = proj;
 }
 
 DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 {
-	return pProjection;
+	return projection;
 }
 
 // Graphics exception stuff
@@ -152,13 +152,13 @@ Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::
 	// join all info messages with newlines into single string
 	for (const auto& m : infoMsgs)
 	{
-		pInfo += m;
-		pInfo.push_back('\n');
+		info += m;
+		info.push_back('\n');
 	}
 	// remove final newline if exists
-	if (!pInfo.empty())
+	if (!info.empty())
 	{
-		pInfo.pop_back();
+		info.pop_back();
 	}
 }
 
@@ -170,7 +170,7 @@ const char* Graphics::HrException::what() const noexcept
 		<< std::dec << " (" << (unsigned long)GetErrorCode() << ")" << std::endl
 		<< "[Error String] " << GetErrorString() << std::endl
 		<< "[Description] " << GetErrorDescription() << std::endl;
-	if (!pInfo.empty())
+	if (!info.empty())
 	{
 		oss << "\n[Error Info]\n" << GetErrorInfo() << std::endl << std::endl;
 	}
@@ -203,7 +203,7 @@ std::string Graphics::HrException::GetErrorDescription() const noexcept
 
 std::string Graphics::HrException::GetErrorInfo() const noexcept
 {
-	return pInfo;
+	return info;
 }
 
 const char* Graphics::DeviceRemovedException::GetType() const noexcept

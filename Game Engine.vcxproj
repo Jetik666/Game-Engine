@@ -74,7 +74,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);IS_DEBUG=true</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -95,7 +95,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);IS_DEBUG=false</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -116,7 +116,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions); IS_DEBUG=true</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -137,7 +137,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);IS_DEBUG=false</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -158,32 +158,54 @@
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="App\Timer\Timer.cpp" />
     <ClCompile Include="App\Window\Window.cpp" />
+    <ClCompile Include="Graphics\InputLayout.cpp" />
+    <ClCompile Include="Resources\Model\Box.cpp" />
+    <ClCompile Include="Device\Bindable.cpp" />
+    <ClCompile Include="Graphics\Drawable\Drawable.cpp" />
     <ClCompile Include="Graphics\DxgiInfoManager\DxgiInfoManager.cpp" />
     <ClCompile Include="Exception\dxerr.cpp" />
     <ClCompile Include="Exception\Exception.cpp" />
     <ClCompile Include="Graphics\Graphics.cpp" />
+    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Input Controls\Keyboard.cpp" />
     <ClCompile Include="Input Controls\Mouse.cpp" />
     <ClCompile Include="App\Window\WindowsMessageMap.cpp" />
+    <ClCompile Include="Graphics\Shaders\Pixel\PixelShader.cpp" />
+    <ClCompile Include="Graphics\Shaders\Vertex\VertexShader.cpp" />
+    <ClCompile Include="Device\Topology.cpp" />
+    <ClCompile Include="Graphics\Buffers\TransformCbuf.cpp" />
+    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="image\icon\manager16.ico" />
+    <Image Include="Resources\image\icon\manager16.ico" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\App.h" />
     <ClInclude Include="App\Timer\Timer.h" />
     <ClInclude Include="App\Window\Window.h" />
     <ClInclude Include="App\Window\WindowThrowMacros.h" />
+    <ClInclude Include="Graphics\Buffers\ConstantBuffers.h" />
+    <ClInclude Include="Graphics\InputLayout.h" />
+    <ClInclude Include="Resources\Model\Box.h" />
+    <ClInclude Include="Device\Bindable.h" />
+    <ClInclude Include="Device\BindableBase.h" />
+    <ClInclude Include="Graphics\Drawable\Drawable.h" />
     <ClInclude Include="Graphics\DxgiInfoManager\DxgiInfoManager.h" />
     <ClInclude Include="Exception\dxerr.h" />
     <ClInclude Include="Exception\Exception.h" />
     <ClInclude Include="Graphics\Graphics.h" />
     <ClInclude Include="Graphics\GraphicsThrowMacros.h" />
+    <ClInclude Include="Graphics\Buffers\IndexBuffer.h" />
     <ClInclude Include="Input Controls\Keyboard.h" />
     <ClInclude Include="Input Controls\Mouse.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="Graphics\Shaders\Pixel\PixelShader.h" />
+    <ClInclude Include="Resources\resource.h" />
     <ClInclude Include="App\Window\WindowsMessageMap.h" />
+    <ClInclude Include="Graphics\Shaders\Vertex\VertexShader.h" />
+    <ClInclude Include="Device\Topology.h" />
+    <ClInclude Include="Graphics\Buffers\TransformCbuf.h" />
+    <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game Engine.rc" />
@@ -194,7 +216,7 @@
     <None Include="Exception\DXTrace.inl" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Graphics\Shader\PixelShader.hlsl">
+    <FxCompile Include="Graphics\Shaders\Pixel\PixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -208,7 +230,7 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Graphics\Shader\VertexShader.hlsl">
+    <FxCompile Include="Graphics\Shaders\Vertex\VertexShader.hlsl">
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
