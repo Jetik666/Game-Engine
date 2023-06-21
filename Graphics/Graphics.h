@@ -58,7 +58,7 @@ public:
 	~Graphics() = default;
 	void EndFrame();
 	void ClearBuffer(float red, float green, float blue) noexcept;
-	void DrawTestTrianlge(float angle);
+	void DrawTestTrianlge(float angle, float x, float y);
 
 private:
 #ifndef NDEBUG

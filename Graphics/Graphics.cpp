@@ -1,7 +1,9 @@
 #include "Graphics.h"
 
+#include <cmath>
 #include <sstream>
 #include <d3dcompiler.h>
+#include <DirectXMath.h>
 
 #include "../Exception/dxerr.h"
 
@@ -99,7 +101,7 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 }
 
 // Create triangle
-void Graphics::DrawTestTrianlge(float angle)
+void Graphics::DrawTestTrianlge(float angle, float x, float y)
 {
 	HRESULT hr;
 
@@ -170,19 +172,17 @@ void Graphics::DrawTestTrianlge(float angle)
 	// Create Constant Buffer for transformation matrix
 	struct ConstantBuffer
 	{
-		struct
-		{
-			float element[4][4];
-		} transformation;
+		DirectX::XMMATRIX transform;
 	};
 
 	const ConstantBuffer cb =
 	{
 		{
-			 (3.0f / 4.0f) * std::cos(angle),  std::sin(angle), 0.0f, 0.0f,
-			 (3.0f / 4.0f) * -std::sin(angle), std::cos(angle), 0.0f, 0.0f,
-			 0.0f,							   0.0f,            1.0f, 0.0f,
-			 0.0f,							   0.0f,            0.0f, 1.0f,
+			DirectX::XMMatrixTranspose(
+				DirectX::XMMatrixRotationZ(angle) * 
+				DirectX::XMMatrixScaling(3.0f / 4.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixTranslation(x, y, 0.0f)
+			)
 		}
 	};
 	Microsoft::WRL::ComPtr<ID3D11Buffer> pConstantBuffer;
