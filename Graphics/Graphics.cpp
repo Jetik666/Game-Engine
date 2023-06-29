@@ -53,23 +53,26 @@ Graphics::Graphics(HWND hWnd)
 		nullptr,
 		&pContext
 	));
+
 	// gain access to texture subresource in swap chain (back buffer)
 	Microsoft::WRL::ComPtr<ID3D11Resource> pBackBuffer;
 	GFX_THROW_INFO(pSwap->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer));
 	GFX_THROW_INFO(pDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &pTarget));
 
-	// Create depth stensil state
-	D3D11_DEPTH_STENCIL_DESC dsDesc{};
+	// create depth stensil state
+	D3D11_DEPTH_STENCIL_DESC dsDesc = {};
 	dsDesc.DepthEnable = TRUE;
 	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> pDSState;
 	GFX_THROW_INFO(pDevice->CreateDepthStencilState(&dsDesc, &pDSState));
+
+	// bind depth state
 	pContext->OMSetDepthStencilState(pDSState.Get(), 1u);
 
-	// Create depth stensil texture
+	// create depth stensil texture
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> pDepthStencil;
-	D3D11_TEXTURE2D_DESC descDepth{};
+	D3D11_TEXTURE2D_DESC descDepth = {};
 	descDepth.Width = 800u;
 	descDepth.Height = 600u;
 	descDepth.MipLevels = 1u;
@@ -81,18 +84,20 @@ Graphics::Graphics(HWND hWnd)
 	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	GFX_THROW_INFO(pDevice->CreateTexture2D(&descDepth, nullptr, &pDepthStencil));
 
-	// Create view of depth stencil texture
-	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV{};
-	descDepth.Format = DXGI_FORMAT_D32_FLOAT;
+	// create view of depth stensil texture
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
+	descDSV.Format = DXGI_FORMAT_D32_FLOAT;
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0u;
-	GFX_THROW_INFO(pDevice->CreateDepthStencilView(pDepthStencil.Get(), &descDSV, &pDSV));
-	
-	// Bind depth stencil view to OM
+	GFX_THROW_INFO(pDevice->CreateDepthStencilView(
+		pDepthStencil.Get(), &descDSV, &pDSV
+	));
+
+	// bind depth stensil view to OM
 	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
 
-	// Configure viewport
-	D3D11_VIEWPORT vp{};
+	// configure viewport
+	D3D11_VIEWPORT vp;
 	vp.Width = 800.0f;
 	vp.Height = 600.0f;
 	vp.MinDepth = 0.0f;
@@ -143,6 +148,7 @@ DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 	return projection;
 }
 
+
 // Graphics exception stuff
 Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
 	:
@@ -181,7 +187,7 @@ const char* Graphics::HrException::what() const noexcept
 
 const char* Graphics::HrException::GetType() const noexcept
 {
-	return "Game Graphics Exception";
+	return "Chili Graphics Exception";
 }
 
 HRESULT Graphics::HrException::GetErrorCode() const noexcept
@@ -206,11 +212,11 @@ std::string Graphics::HrException::GetErrorInfo() const noexcept
 	return info;
 }
 
+
 const char* Graphics::DeviceRemovedException::GetType() const noexcept
 {
-	return "Game Graphics Exception [Device Removed] (DXGI_ERROR_DEVICE_REMOVED)";
+	return "Chili Graphics Exception [Device Removed] (DXGI_ERROR_DEVICE_REMOVED)";
 }
-
 Graphics::InfoException::InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept
 	:
 	Exception(line, file)
@@ -227,6 +233,7 @@ Graphics::InfoException::InfoException(int line, const char* file, std::vector<s
 		info.pop_back();
 	}
 }
+
 
 const char* Graphics::InfoException::what() const noexcept
 {

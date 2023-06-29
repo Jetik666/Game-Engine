@@ -7,7 +7,7 @@ class App
 {
 public:
 	App();
-	// Master frame / message loop
+	// master frame / message loop
 	int Go();
 	~App();
 private:
@@ -17,4 +17,3 @@ private:
 	Timer timer;
 	std::vector<std::unique_ptr<class Box>> boxes;
 };
-

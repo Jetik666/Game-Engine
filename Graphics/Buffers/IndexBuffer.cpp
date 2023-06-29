@@ -27,5 +27,5 @@ void IndexBuffer::Bind(Graphics& gfx) noexcept
 
 UINT IndexBuffer::GetCount() const noexcept
 {
-	return 0;
+	return count;
 }

@@ -13,7 +13,7 @@ public:
 	void Update(float dt) noexcept override;
 	DirectX::XMMATRIX GetTransformXM() const noexcept override;
 private:
-	// Positional
+	// positional
 	float r;
 	float roll = 0.0f;
 	float pitch = 0.0f;
@@ -21,7 +21,6 @@ private:
 	float theta;
 	float phi;
 	float chi;
-
 	// speed (delta/s)
 	float droll;
 	float dpitch;
@@ -30,4 +29,3 @@ private:
 	float dphi;
 	float dchi;
 };
-

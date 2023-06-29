@@ -15,12 +15,11 @@
 class Graphics
 {
 	friend class Bindable;
-public: 
+public:
 	class Exception : public GameException
 	{
 		using GameException::GameException;
 	};
-
 	class HrException : public Exception
 	{
 	public:
@@ -31,12 +30,10 @@ public:
 		std::string GetErrorString() const noexcept;
 		std::string GetErrorDescription() const noexcept;
 		std::string GetErrorInfo() const noexcept;
-
 	private:
 		HRESULT hr;
 		std::string info;
 	};
-
 	class InfoException : public Exception
 	{
 	public:
@@ -47,7 +44,6 @@ public:
 	private:
 		std::string info;
 	};
-
 	class DeviceRemovedException : public HrException
 	{
 		using HrException::HrException;
@@ -70,7 +66,7 @@ private:
 	DirectX::XMMATRIX projection;
 #ifndef NDEBUG
 	DxgiInfoManager infoManager;
-#endif // !NDEBUG
+#endif
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
