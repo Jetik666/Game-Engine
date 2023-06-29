@@ -16,6 +16,5 @@ private:
 	Window wnd;
 	Timer timer;
 	std::vector<std::unique_ptr<class Box>> boxes;
-	static constexpr size_t pDrawables = 180;
 };
 

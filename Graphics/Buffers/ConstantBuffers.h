@@ -20,29 +20,27 @@ public:
 		memcpy(msr.pData, &consts, sizeof(consts));
 		GetContext(gfx)->Unmap(pConstantBuffer.Get(), 0u);
 	}
-
 	ConstantBuffer(Graphics& gfx, const C& consts)
 	{
 		INFOMAN(gfx);
 
-		D3D11_BUFFER_DESC cbd{};
-		cbd.BindFlags = D3D10_BIND_CONSTANT_BUFFER;
+		D3D11_BUFFER_DESC cbd;
+		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		cbd.Usage = D3D11_USAGE_DYNAMIC;
 		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 		cbd.MiscFlags = 0u;
 		cbd.ByteWidth = sizeof(consts);
 		cbd.StructureByteStride = 0u;
 
-		D3D11_SUBRESOURCE_DATA csd{};
+		D3D11_SUBRESOURCE_DATA csd = {};
 		csd.pSysMem = &consts;
 		GFX_THROW_INFO(GetDevice(gfx)->CreateBuffer(&cbd, &csd, &pConstantBuffer));
 	}
-
 	ConstantBuffer(Graphics& gfx)
 	{
 		INFOMAN(gfx);
 
-		D3D11_BUFFER_DESC cbd{};
+		D3D11_BUFFER_DESC cbd;
 		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		cbd.Usage = D3D11_USAGE_DYNAMIC;
 		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;

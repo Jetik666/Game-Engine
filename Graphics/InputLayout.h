@@ -12,4 +12,3 @@ public:
 protected:
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> pInputLayout;
 };
-

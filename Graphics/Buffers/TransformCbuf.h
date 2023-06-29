@@ -13,4 +13,3 @@ private:
 	VertexConstantBuffer<DirectX::XMMATRIX> vcbuf;
 	const Drawable& parent;
 };
-

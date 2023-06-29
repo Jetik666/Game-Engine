@@ -10,4 +10,3 @@ public:
 protected:
 	D3D11_PRIMITIVE_TOPOLOGY type;
 };
-
