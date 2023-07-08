@@ -148,7 +148,7 @@
     <ClInclude Include="App\Window\WindowsMessageMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="App\Window\WindowThrowMacros.h">
+    <ClInclude Include="App\Window\WindowsThrowMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\GraphicsThrowMacros.h">
@@ -188,6 +188,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Drawable\DrawableBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -184,8 +184,9 @@
     <ClInclude Include="App\App.h" />
     <ClInclude Include="App\Timer\Timer.h" />
     <ClInclude Include="App\Window\Window.h" />
-    <ClInclude Include="App\Window\WindowThrowMacros.h" />
+    <ClInclude Include="App\Window\WindowsThrowMacros.h" />
     <ClInclude Include="Graphics\Buffers\ConstantBuffers.h" />
+    <ClInclude Include="Graphics\Drawable\DrawableBase.h" />
     <ClInclude Include="Graphics\InputLayout.h" />
     <ClInclude Include="Resources\Model\Box.h" />
     <ClInclude Include="Device\Bindable.h" />

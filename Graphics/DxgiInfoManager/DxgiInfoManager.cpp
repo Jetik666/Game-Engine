@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "../../App/Window/Window.h"
-#include "../../App/Window/WindowThrowMacros.h"
+#include "../../App/Window/WindowsThrowMacros.h"
 #include "../Graphics.h"
 #include "../GraphicsThrowMacros.h"
 

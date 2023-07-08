@@ -3,7 +3,7 @@
 #include <sstream>
 
 #include "../../Resources/resource.h"
-#include "WindowThrowMacros.h"
+#include "WindowsThrowMacros.h"
 
 // Window Class
 Window::WindowClass Window::WindowClass::pWndClass;
