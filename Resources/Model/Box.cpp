@@ -1,6 +1,6 @@
 #include "Box.h"
 
-#include "../../Device/BindableBase.h"
+#include "../../Binding/BindableBase.h"
 #include "../../Graphics/GraphicsThrowMacros.h"
 
 Box::Box(Graphics& gfx,

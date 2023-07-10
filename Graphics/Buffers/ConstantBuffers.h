@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Device/Bindable.h"
+#include "../../Binding/Bindable.h"
 #include "../GraphicsThrowMacros.h"
 
 template<typename C>
@@ -24,7 +24,7 @@ public:
 	{
 		INFOMAN(gfx);
 
-		D3D11_BUFFER_DESC cbd;
+		D3D11_BUFFER_DESC cbd{};
 		cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		cbd.Usage = D3D11_USAGE_DYNAMIC;
 		cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;

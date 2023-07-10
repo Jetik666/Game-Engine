@@ -158,9 +158,10 @@
     <ClCompile Include="App\App.cpp" />
     <ClCompile Include="App\Timer\Timer.cpp" />
     <ClCompile Include="App\Window\Window.cpp" />
+    <ClCompile Include="Binding\Bindable.cpp" />
+    <ClCompile Include="Binding\Topology.cpp" />
     <ClCompile Include="Graphics\InputLayout.cpp" />
     <ClCompile Include="Resources\Model\Box.cpp" />
-    <ClCompile Include="Device\Bindable.cpp" />
     <ClCompile Include="Graphics\Drawable\Drawable.cpp" />
     <ClCompile Include="Graphics\DxgiInfoManager\DxgiInfoManager.cpp" />
     <ClCompile Include="Exception\dxerr.cpp" />
@@ -172,7 +173,6 @@
     <ClCompile Include="App\Window\WindowsMessageMap.cpp" />
     <ClCompile Include="Graphics\Shaders\Pixel\PixelShader.cpp" />
     <ClCompile Include="Graphics\Shaders\Vertex\VertexShader.cpp" />
-    <ClCompile Include="Device\Topology.cpp" />
     <ClCompile Include="Graphics\Buffers\TransformCbuf.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -185,12 +185,15 @@
     <ClInclude Include="App\Timer\Timer.h" />
     <ClInclude Include="App\Window\Window.h" />
     <ClInclude Include="App\Window\WindowsThrowMacros.h" />
+    <ClInclude Include="Binding\Bindable.h" />
+    <ClInclude Include="Binding\BindableBase.h" />
+    <ClInclude Include="Binding\Topology.h" />
     <ClInclude Include="Graphics\Buffers\ConstantBuffers.h" />
     <ClInclude Include="Graphics\Drawable\DrawableBase.h" />
     <ClInclude Include="Graphics\InputLayout.h" />
+    <ClInclude Include="Resources\IndexedTriangleList.h" />
+    <ClInclude Include="Resources\Math.h" />
     <ClInclude Include="Resources\Model\Box.h" />
-    <ClInclude Include="Device\Bindable.h" />
-    <ClInclude Include="Device\BindableBase.h" />
     <ClInclude Include="Graphics\Drawable\Drawable.h" />
     <ClInclude Include="Graphics\DxgiInfoManager\DxgiInfoManager.h" />
     <ClInclude Include="Exception\dxerr.h" />
@@ -201,10 +204,14 @@
     <ClInclude Include="Input Controls\Keyboard.h" />
     <ClInclude Include="Input Controls\Mouse.h" />
     <ClInclude Include="Graphics\Shaders\Pixel\PixelShader.h" />
+    <ClInclude Include="Resources\Model\Cone.h" />
+    <ClInclude Include="Resources\Model\Cube.h" />
+    <ClInclude Include="Resources\Model\Plane.h" />
+    <ClInclude Include="Resources\Model\Prism.h" />
+    <ClInclude Include="Resources\Model\Sphere.h" />
     <ClInclude Include="Resources\resource.h" />
     <ClInclude Include="App\Window\WindowsMessageMap.h" />
     <ClInclude Include="Graphics\Shaders\Vertex\VertexShader.h" />
-    <ClInclude Include="Device\Topology.h" />
     <ClInclude Include="Graphics\Buffers\TransformCbuf.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
   </ItemGroup>

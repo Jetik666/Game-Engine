@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Device/Bindable.h"
+#include "../Binding/Bindable.h"
 
 class InputLayout: public Bindable
 {
