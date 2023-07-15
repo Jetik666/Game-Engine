@@ -108,6 +108,9 @@
     <ClCompile Include="Binding\Topology.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Resources\Model\Pyramid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\image\icon\manager16.ico">
@@ -214,6 +217,9 @@
     <ClInclude Include="Resources\Model\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Resources\Model\Pyramid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game Engine.rc">
@@ -232,7 +238,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Graphics\Shaders\Vertex\VertexShader.hlsl" />
-    <FxCompile Include="Graphics\Shaders\Pixel\PixelShader.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorBlendPS.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorBlendVS.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorIndexPS.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorIndexVS.hlsl" />
   </ItemGroup>
 </Project>
