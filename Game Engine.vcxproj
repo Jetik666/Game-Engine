@@ -161,6 +161,7 @@
     <ClCompile Include="Binding\Bindable.cpp" />
     <ClCompile Include="Binding\Topology.cpp" />
     <ClCompile Include="Graphics\InputLayout.cpp" />
+    <ClCompile Include="Resources\Model\Melon.cpp" />
     <ClCompile Include="Resources\Model\Box.cpp" />
     <ClCompile Include="Graphics\Drawable\Drawable.cpp" />
     <ClCompile Include="Graphics\DxgiInfoManager\DxgiInfoManager.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Graphics\Buffers\ConstantBuffers.h" />
     <ClInclude Include="Graphics\Drawable\DrawableBase.h" />
     <ClInclude Include="Graphics\InputLayout.h" />
+    <ClInclude Include="Resources\Model\Melon.h" />
     <ClInclude Include="Resources\IndexedTriangleList.h" />
     <ClInclude Include="Resources\Math.h" />
     <ClInclude Include="Resources\Model\Box.h" />

@@ -31,9 +31,9 @@ public:
 			}
 		}
 
-		// add the cap vertices
+		// Add the cap vertices
 		const auto iNorthPole = (unsigned short)vertices.size();
-		vertices.emplace_back(); 
+		vertices.emplace_back();
 		DirectX::XMStoreFloat3(&vertices.back().pos, base);
 		const auto iSouthPole = (unsigned short)vertices.size();
 		vertices.emplace_back();
@@ -51,7 +51,7 @@ public:
 				indices.push_back(CalcIndex(iLat + 1, iLong, longDiv));
 				indices.push_back(CalcIndex(iLat + 1, iLong + 1, longDiv));
 			}
-			// wrap band
+			// Wrap band
 			indices.push_back(CalcIndex(iLat, longDiv - 1, longDiv));
 			indices.push_back(CalcIndex(iLat + 1, longDiv - 1, longDiv));
 			indices.push_back(CalcIndex(iLat, 0, longDiv));
@@ -60,31 +60,32 @@ public:
 			indices.push_back(CalcIndex(iLat + 1, 0, longDiv));
 		}
 
-		// cap fans
+		// Cap fans
 		for (unsigned short iLong = 0; iLong < longDiv - 1; iLong++)
 		{
-			// north
+			// North
 			indices.push_back(iNorthPole);
 			indices.push_back(CalcIndex(0, iLong, longDiv));
 			indices.push_back(CalcIndex(0, iLong + 1, longDiv));
-			// south
+			// South
 			indices.push_back(CalcIndex(latDiv - 2, iLong + 1, longDiv));
 			indices.push_back(CalcIndex(latDiv - 2, iLong, longDiv));
 			indices.push_back(iSouthPole);
 		}
 
-		// wrap triangles
-		// north
+		// Wrap triangles
+		// North
 		indices.push_back(iNorthPole);
 		indices.push_back(CalcIndex(0, longDiv - 1, longDiv));
 		indices.push_back(CalcIndex(0, 0, longDiv));
-		// south
+		// South
 		indices.push_back(CalcIndex(latDiv - 2, 0, longDiv));
 		indices.push_back(CalcIndex(latDiv - 2, longDiv - 1, longDiv));
 		indices.push_back(iSouthPole);
 
-		return { std::move(vertices),std::move(indices) };
+		return { std::move(vertices), std::move(indices) };
 	}
+
 	template<class V>
 	static IndexedTriangleList<V> Make()
 	{
@@ -92,7 +93,7 @@ public:
 	}
 
 private:
-	unsigned short CalcIndex(unsigned short iLat, unsigned short iLong, unsigned short longDiv)
+	inline static unsigned short CalcIndex(unsigned short iLat, unsigned short iLong, unsigned short longDiv)
 	{
 		return iLat * longDiv + iLong;
 	}

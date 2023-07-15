@@ -21,11 +21,14 @@ public:
 		for (auto& v : vertices)
 		{
 			const DirectX::XMVECTOR pos = DirectX::XMLoadFloat3(&v.pos);
-			DirectX::XMStoreFloat3(&v.pos, DirectX::XMVector3Transform(pos, matrix));
+			DirectX::XMStoreFloat3(
+				&v.pos,
+				DirectX::XMVector3Transform(pos, matrix)
+			);
 		}
 	}
 
 public:
 	std::vector<T> vertices;
-	std::vector<unsigned short> indices
+	std::vector<unsigned short> indices;
 };

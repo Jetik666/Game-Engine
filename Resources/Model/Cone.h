@@ -13,7 +13,7 @@ public:
 	{
 		assert(longDiv >= 3);
 
-		const DirectX::XMVECTOR base = DirectX::XMVECTOR(1.0f, 0.0f, -1.0f, 0.0f);
+		const auto base = DirectX::XMVectorSet(1.0f, 0.0f, -1.0f, 0.0f);
 		const float longitudeAngle = 2.0f * PI / longDiv;
 
 		// Base vertices
@@ -21,8 +21,8 @@ public:
 		for (int i = 0; i < longDiv; i++)
 		{
 			vertices.emplace_back();
-			DirectX::XMVECTOR vector = DirectX::XMVector3Transform(base, longitudeAngle * i);
-			DirectX::XMStoreFloat3(&vertices.back().pos, v);
+			auto vector = DirectX::XMVector3Transform(base, DirectX::XMMatrixRotationZ(longitudeAngle * i));
+			DirectX::XMStoreFloat3(&vertices.back().pos, vector);
 		}
 
 		// Center
