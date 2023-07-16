@@ -2,37 +2,35 @@
 
 Timer::Timer() noexcept 
 {
-	mLast = std::chrono::steady_clock::now();
+	pDeltaTime = 0;
+	pFPS = 0;
+
+	pLast = std::chrono::steady_clock::now();
+	pFrameTime = pLast - pLast;
 }
 
-float Timer::Mark() noexcept 
+void Timer::Mark() noexcept 
 {
-	const auto old = mLast;
-	mLast = std::chrono::steady_clock::now();
-	/*mFrameTime = mLast - old;
-	return mFrameTime.count();*/
-	return std::chrono::duration<float>(mLast - old).count();
+	std::chrono::steady_clock::time_point CurrentTime = std::chrono::steady_clock::now();
+
+	pFrameTime = CurrentTime - pLast;
+	pFPS = 1 / pFrameTime.count();
+	pDeltaTime = 1 / (float)pFPS;
+
+	pLast = CurrentTime;
 }
 
-float Timer::Peek() noexcept 
+float Timer::GetDeltaTime() noexcept
 {
-	return std::chrono::duration<float>(std::chrono::steady_clock::now() - mLast).count();
+	return pDeltaTime;
 }
 
-//int Timer::GetCurrentFPS() noexcept 
-//{
-//	mTimePerFrame = Mark();
-//
-//	mFrames += int(1.0f / mTimePerFrame);
-//	return static_cast<int>(1.0f / mTimePerFrame);
-//}
-//
-//int Timer::GetFrames() noexcept 
-//{
-//	return mFrames;
-//}
-//
-//float Timer::GetTimePerFrame() noexcept 
-//{
-//	return mTimePerFrame;
-//}
+float Timer::GetTimePerFrame() noexcept
+{
+	return pFrameTime.count();
+}
+
+int Timer::GetFramesPerSecond() noexcept
+{
+	return pFPS;
+}

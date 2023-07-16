@@ -91,6 +91,7 @@ void Window::SetTitle(const std::string& title)
 std::optional<int> Window::ProcessMessages()
 {
 	MSG msg;
+	
 	// While queue has messages, remove and dispatch them (but do not block on empty queue)
 	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 	{
@@ -99,6 +100,11 @@ std::optional<int> Window::ProcessMessages()
 		{
 			// Return optional wrapping int (arg to PostQuitMessage is in wParam) signals quit
 			return (int)msg.wParam;
+		}
+
+		if (msg.message == WM_MOVE || msg.message == WM_SIZE)
+		{
+			return {};
 		}
 
 		// TranslateMessage will post auxilliary WM_CHAR message from key msgs
@@ -157,13 +163,17 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		// We dont want the DefProc to handle this message because
 		// We want our destructor to destroy the window, so return 0 instead of break
 	case WM_CLOSE:
+	{
 		PostQuitMessage(0);
 		return 0;
+	}
 
 		// Clear keystate when window loses focus to prevent input getting "stuck
 	case WM_KILLFOCUS:
+	{
 		kbd.ClearState();
 		break;
+	}
 
 #pragma region KEYBOARD MESSAGES
 		/******** KEYBOARD MESSAGES ********/
@@ -171,20 +181,26 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_KEYDOWN:
 		// Syskey commands need to be handled to track ALT key (VK_MENU) and F10
 	case WM_SYSKEYDOWN:
+	{
 		// filter autorepeat
-		if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled()) 
+		if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled())
 		{
 			kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
 		}
 		break;
+	}
 
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
+	{
 		kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
 		break;
+	}
 	case WM_CHAR:
+	{
 		kbd.OnChar(static_cast<unsigned char>(wParam));
 		break;
+	}
 
 		/******** END KEYBOARD MESSAGES ********/
 #pragma endregion
@@ -192,7 +208,8 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 #pragma region MOUSE MESSAGES
 	/******** MOUSE MESSAGES ********/
 
-	case WM_MOUSEMOVE: {
+	case WM_MOUSEMOVE: 
+	{
 		const POINTS pt = MAKEPOINTS(lParam);
 		// In client region -> log move and log enter + capture mouse (if not previously in window)
 		if (pt.x >= 0 && pt.x < pWidth && pt.y >= 0 && pt.y < pHeight) 

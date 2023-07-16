@@ -46,6 +46,8 @@
 
 #include "App/App.h"
 
+#include <thread>
+
 int CALLBACK WinMain(
 	HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,

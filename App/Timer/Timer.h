@@ -6,9 +6,17 @@ class Timer
 {
 public:
 	Timer() noexcept;
-	float Mark() noexcept;
-	float Peek() noexcept;
+	void Mark() noexcept;
+
+	float GetDeltaTime() noexcept;
+	float GetTimePerFrame() noexcept;
+	int GetFramesPerSecond() noexcept;
+
 private:
-	std::chrono::steady_clock::time_point mLast;
+	float pDeltaTime;
+	int pFPS;
+
+	std::chrono::steady_clock::time_point pLast;
+	std::chrono::duration<float> pFrameTime;
 	/*std::chrono::duration<float> mFrameTime;*/
 };

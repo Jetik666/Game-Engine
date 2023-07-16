@@ -62,6 +62,7 @@ public:
 	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
 	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
+	void TurnOffVsync() noexcept;
 private:
 	DirectX::XMMATRIX projection;
 #ifndef NDEBUG
