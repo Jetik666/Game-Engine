@@ -6,17 +6,22 @@ class Timer
 {
 public:
 	Timer() noexcept;
+	// Get new timer data (FPS, frame time)
 	void Mark() noexcept;
 
-	float GetDeltaTime() noexcept;
-	float GetTimePerFrame() noexcept;
+	// FPS limiter
+	bool ShowFrame() noexcept;
+
+	// Get time per frame
+	double GetTimePerFrame() noexcept;
+	// Get FPS
 	int GetFramesPerSecond() noexcept;
 
 private:
-	float pDeltaTime;
+	int pFPS_max = 300;
+
 	int pFPS;
 
 	std::chrono::steady_clock::time_point pLast;
-	std::chrono::duration<float> pFrameTime;
-	/*std::chrono::duration<float> mFrameTime;*/
+	std::chrono::duration<double> pFrameTime;
 };

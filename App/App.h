@@ -9,16 +9,20 @@ class App
 {
 public:
 	App();
-	// master frame / message loop
-	int Go();
 	~App();
+	// Master frame / message loop
+	int Go();
 private:
+	// Rendering
 	void DoFrame();
 private:
-	std::atomic<bool> quitting = false;
+	std::atomic<bool> pRunning = true;
+	std::mutex pRenderMutex;
 
-	Window wnd;
-	Timer timer;
-	std::vector<std::unique_ptr<class Drawable>> drawables;
-	static constexpr size_t nDrawables = 100;
+	Window pWindow;
+	Timer pTimer;
+
+	// Objects to draw
+	std::vector<std::unique_ptr<class Drawable>> pDrawables;
+	static constexpr size_t pAmount = 100;
 };

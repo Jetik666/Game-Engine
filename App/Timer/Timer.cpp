@@ -2,7 +2,6 @@
 
 Timer::Timer() noexcept 
 {
-	pDeltaTime = 0;
 	pFPS = 0;
 
 	pLast = std::chrono::steady_clock::now();
@@ -11,21 +10,25 @@ Timer::Timer() noexcept
 
 void Timer::Mark() noexcept 
 {
-	std::chrono::steady_clock::time_point CurrentTime = std::chrono::steady_clock::now();
+	std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
 
-	pFrameTime = CurrentTime - pLast;
+	pFrameTime = currentTime - pLast;
 	pFPS = 1 / pFrameTime.count();
-	pDeltaTime = 1 / (float)pFPS;
 
-	pLast = CurrentTime;
+	pLast = currentTime;
 }
 
-float Timer::GetDeltaTime() noexcept
+bool Timer::ShowFrame() noexcept
 {
-	return pDeltaTime;
+	std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
+	if (1 / (float)pFPS_max <= std::chrono::duration<double>(currentTime - pLast).count())
+	{
+		return true;
+	}
+	return false;
 }
 
-float Timer::GetTimePerFrame() noexcept
+double Timer::GetTimePerFrame() noexcept
 {
 	return pFrameTime.count();
 }

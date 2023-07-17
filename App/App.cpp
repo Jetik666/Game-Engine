@@ -11,7 +11,7 @@
 
 App::App()
 	:
-	wnd(800, 600, "Niggers in space")
+	pWindow(800, 600, "Niggers in space")
 {
 	class Factory
 	{
@@ -53,50 +53,67 @@ App::App()
 		std::uniform_int_distribution<int> longdist{10, 40};
 		std::uniform_int_distribution<int> typedist{0, 2};
 	};
-	Factory factory(wnd.Gfx());
-	drawables.reserve(nDrawables);
-	std::generate_n(std::back_inserter(drawables), nDrawables, factory);
-	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
-}
-
-int App::Go()
-{
-	std::thread WindowMessages(&App::DoFrame, this);
-	while (!quitting)
-	{
-		// process all messages pending, but to not block for new messages
-		if (const auto ecode = Window::ProcessMessages())
-		{
-			// if return optional has value, means we're quitting so return exit code
-			quitting = true;
-			WindowMessages.join();
-			return *ecode;
-		}
-		std::this_thread::yield;
-		//DoFrame();
-	}
-	WindowMessages.join();
-	return 0;
+	Factory factory(pWindow.Gfx());
+	pDrawables.reserve(pAmount);
+	std::generate_n(std::back_inserter(pDrawables), pAmount, factory);
+	pWindow.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
 }
 
 App::~App()
 {}
 
+int App::Go()
+{
+	std::thread renderThread(&App::DoFrame, this);
+
+	while (pRunning)
+	{
+		// Process all messages pending, but to not block for new messages
+		// If return optional has value, means we're quitting so return exit code
+		if (const auto ecode = Window::ProcessMessages())
+		{
+			pRunning = false;
+			{
+				std::lock_guard<std::mutex> lock(pRenderMutex);
+				renderThread.join();
+
+				return *ecode;
+			}
+		}
+	}
+	renderThread.join();
+	return 0;
+}
+
 void App::DoFrame()
 {
-	while (!quitting)
+	pTimer.Mark();
+
+	while (pRunning)
 	{
-		timer.Mark();
-
-		wnd.SetTitle("Niggers in space " + std::to_string(timer.GetTimePerFrame() * 1000) + " ms "
-			+ std::to_string(timer.GetFramesPerSecond()) + " FPS " + std::to_string(timer.GetDeltaTime()));
-
-		wnd.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
-		for (auto& d : drawables)
+		// FPS limit
+		if (pTimer.ShowFrame())
 		{
-			d->Update(timer.GetDeltaTime());
-			d->Draw(wnd.Gfx());
+			pTimer.Mark();
+
+			if (IS_DEBUG)
+			{
+				pWindow.SetTitle(
+					"Niggers in space "
+					+ std::to_string(pTimer.GetTimePerFrame() * 1000) + " ms "
+					+ std::to_string(pTimer.GetFramesPerSecond()) + " FPS "
+				);
+			}
+
+			std::lock_guard<std::mutex> lock(pRenderMutex);
+
+			pWindow.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
+			for (auto& d : pDrawables)
+			{
+				d->Update(pTimer.GetTimePerFrame());
+				d->Draw(pWindow.Gfx());
+			}
+			pWindow.Gfx().EndFrame();
 		}
-		wnd.Gfx().EndFrame();
 	}
 }
