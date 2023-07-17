@@ -8,6 +8,7 @@
 class App
 {
 public:
+	// Constructor
 	App();
 	~App();
 	// Master frame / message loop

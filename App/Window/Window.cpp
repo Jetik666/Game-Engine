@@ -160,26 +160,25 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept 
 {
 	switch (msg) {
-		// We dont want the DefProc to handle this message because
-		// We want our destructor to destroy the window, so return 0 instead of break
+	// We dont want the DefProc to handle this message because
+	// We want our destructor to destroy the window, so return 0 instead of break
 	case WM_CLOSE:
 	{
 		PostQuitMessage(0);
 		return 0;
 	}
 
-		// Clear keystate when window loses focus to prevent input getting "stuck
+	// Clear keystate when window loses focus to prevent input getting "stuck
 	case WM_KILLFOCUS:
 	{
 		kbd.ClearState();
 		break;
 	}
 
-#pragma region KEYBOARD MESSAGES
-		/******** KEYBOARD MESSAGES ********/
+	/******** KEYBOARD MESSAGES ********/
 
 	case WM_KEYDOWN:
-		// Syskey commands need to be handled to track ALT key (VK_MENU) and F10
+	// Syskey commands need to be handled to track ALT key (VK_MENU) and F10
 	case WM_SYSKEYDOWN:
 	{
 		// filter autorepeat
@@ -202,10 +201,6 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		break;
 	}
 
-		/******** END KEYBOARD MESSAGES ********/
-#pragma endregion
-
-#pragma region MOUSE MESSAGES
 	/******** MOUSE MESSAGES ********/
 
 	case WM_MOUSEMOVE: 
@@ -280,9 +275,6 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		mouse.OnWheelDelta(pt.x, pt.y, delta);
 		break;
 	}
-
-	/******** END MOUSE MESSAGES ********/
-#pragma endregion
 	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);

@@ -1,6 +1,6 @@
 #include "Timer.h"
 
-Timer::Timer() noexcept 
+Timer::Timer() noexcept
 {
 	pFPS = 0;
 
@@ -21,7 +21,7 @@ void Timer::Mark() noexcept
 bool Timer::ShowFrame() noexcept
 {
 	std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
-	if (1 / (float)pFPS_max <= std::chrono::duration<float>(currentTime - pLast).count())
+	if (1 / (float)pFPS_MAX <= std::chrono::duration<float>(currentTime - pLast).count())
 	{
 		return true;
 	}
@@ -36,4 +36,9 @@ float Timer::GetTimePerFrame() noexcept
 int Timer::GetFramesPerSecond() noexcept
 {
 	return pFPS;
+}
+
+void Timer::SetFrameLimit(int nFPS_MAX) noexcept
+{
+	pFPS_MAX = nFPS_MAX;
 }

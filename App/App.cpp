@@ -113,5 +113,10 @@ void App::DoFrame()
 			}
 			pWindow.Gfx().EndFrame();
 		}
+
+		if (pWindow.kbd.KeyIsPressed(0x57))
+		{
+			pRunning = false;
+		}
 	}
 }
