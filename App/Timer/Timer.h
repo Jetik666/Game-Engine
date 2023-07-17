@@ -13,7 +13,7 @@ public:
 	bool ShowFrame() noexcept;
 
 	// Get time per frame
-	double GetTimePerFrame() noexcept;
+	float GetTimePerFrame() noexcept;
 	// Get FPS
 	int GetFramesPerSecond() noexcept;
 
@@ -23,5 +23,5 @@ private:
 	int pFPS;
 
 	std::chrono::steady_clock::time_point pLast;
-	std::chrono::duration<double> pFrameTime;
+	std::chrono::duration<float> pFrameTime;
 };

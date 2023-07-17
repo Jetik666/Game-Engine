@@ -87,8 +87,6 @@ int App::Go()
 
 void App::DoFrame()
 {
-	pTimer.Mark();
-
 	while (pRunning)
 	{
 		// FPS limit
