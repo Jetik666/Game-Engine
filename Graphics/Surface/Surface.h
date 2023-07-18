@@ -139,7 +139,7 @@ public:
 	Surface& operator=(const Surface&) = delete;
 	~Surface();
 	void Clear(Color fillValue) noexcept;
-	void PutPixel(unsigned int x, unsigned int y, Color c) noexcept(!IS_DEBUG);
+	void PutPixel(unsigned int x, unsigned int y, Color color) noexcept(!IS_DEBUG);
 	Color GetPixel(unsigned int x, unsigned int y) const noexcept(!IS_DEBUG);
 	unsigned int GetWidth() const noexcept;
 	unsigned int GetHeight() const noexcept;

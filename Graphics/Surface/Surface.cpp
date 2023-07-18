@@ -1,5 +1,6 @@
 #define FULL_WINTARD
 #include "Surface.h"
+
 #include <algorithm>
 namespace Gdiplus
 {
@@ -18,6 +19,13 @@ Surface::Surface(unsigned int width, unsigned int height) noexcept
 	height(height)
 {}
 
+Surface::Surface(Surface&& source) noexcept
+	:
+	pBuffer(std::move(source.pBuffer)),
+	width(source.width),
+	height(source.height)
+{}
+
 Surface& Surface::operator=(Surface&& donor) noexcept
 {
 	width = donor.width;
@@ -27,13 +35,6 @@ Surface& Surface::operator=(Surface&& donor) noexcept
 	return *this;
 }
 
-Surface::Surface(Surface&& source) noexcept
-	:
-	pBuffer(std::move(source.pBuffer)),
-	width(source.width),
-	height(source.height)
-{}
-
 Surface::~Surface()
 {}
 
@@ -42,13 +43,14 @@ void Surface::Clear(Color fillValue) noexcept
 	memset(pBuffer.get(), fillValue.dword, width * height * sizeof(Color));
 }
 
-void Surface::PutPixel(unsigned int x, unsigned int y, Color c) noexcept(!IS_DEBUG)
+void Surface::PutPixel(unsigned int x, unsigned int y, Color color) noexcept(!IS_DEBUG)
 {
 	assert(x >= 0);
 	assert(y >= 0);
 	assert(x < width);
 	assert(y < height);
-	pBuffer[y * width + x] = c;
+
+	pBuffer[y * width + x] = color;
 }
 
 Surface::Color Surface::GetPixel(unsigned int x, unsigned int y) const noexcept(!IS_DEBUG)
@@ -57,6 +59,7 @@ Surface::Color Surface::GetPixel(unsigned int x, unsigned int y) const noexcept(
 	assert(y >= 0);
 	assert(x < width);
 	assert(y < height);
+
 	return pBuffer[y * width + x];
 }
 
@@ -92,7 +95,7 @@ Surface Surface::FromFile(const std::string& name)
 	std::unique_ptr<Color[]> pBuffer;
 
 	{
-		// convert filenam to wide string (for Gdiplus)
+		// Convert filenam to wide string (for Gdiplus)
 		wchar_t wideName[512];
 		mbstowcs_s(nullptr, wideName, name.c_str(), _TRUNCATE);
 
@@ -112,9 +115,9 @@ Surface Surface::FromFile(const std::string& name)
 		{
 			for (unsigned int x = 0; x < width; x++)
 			{
-				Gdiplus::Color c;
-				bitmap.GetPixel(x, y, &c);
-				pBuffer[y * width + x] = c.GetValue();
+				Gdiplus::Color color;
+				bitmap.GetPixel(x, y, &color);
+				pBuffer[y * width + x] = color.GetValue();
 			}
 		}
 	}
@@ -126,8 +129,8 @@ void Surface::Save(const std::string& filename) const
 {
 	auto GetEncoderClsid = [&filename](const WCHAR* format, CLSID* pClsid) -> void
 	{
-		UINT  num = 0;          // number of image encoders
-		UINT  size = 0;         // size of the image encoder array in bytes
+		UINT  num = 0;          // Number of image encoders
+		UINT  size = 0;         // Size of the image encoder array in bytes
 
 		Gdiplus::ImageCodecInfo* pImageCodecInfo = nullptr;
 
@@ -161,8 +164,7 @@ void Surface::Save(const std::string& filename) const
 
 		free(pImageCodecInfo);
 		std::stringstream ss;
-		ss << "Saving surface to [" << filename <<
-			"]: failed to get encoder; failed to find matching encoder.";
+		ss << "Saving surface to [" << filename << "]: failed to get encoder; failed to find matching encoder.";
 		throw ColorException(__LINE__, __FILE__, ss.str());
 	};
 
@@ -187,6 +189,7 @@ void Surface::Copy(const Surface& src) noexcept(!IS_DEBUG)
 {
 	assert(width == src.width);
 	assert(height == src.height);
+
 	memcpy(pBuffer.get(), src.pBuffer.get(), width * height * sizeof(Color));
 }
 
