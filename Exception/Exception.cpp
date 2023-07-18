@@ -2,9 +2,9 @@
 
 #include <sstream>
 
-GameException::GameException(int line, const char* file) noexcept : line(line), file(file) {}
+Exception::Exception(int line, const char* file) noexcept : line(line), file(file) {}
 
-const char* GameException::what() const noexcept
+const char* Exception::what() const noexcept
 {
 	std::ostringstream oss;
 	oss << GetType() << std::endl << GetOriginString();
@@ -12,22 +12,22 @@ const char* GameException::what() const noexcept
 	return whatBuffer.c_str();
 }
 
-const char* GameException::GetType() const noexcept
+const char* Exception::GetType() const noexcept
 {
 	return "Game Exception";
 }
 
-int GameException::GetLine() const noexcept
+int Exception::GetLine() const noexcept
 {
 	return line;
 }
 
-const std::string& GameException::GetFile() const noexcept
+const std::string& Exception::GetFile() const noexcept
 {
 	return file;
 }
 
-std::string GameException::GetOriginString() const noexcept
+std::string Exception::GetOriginString() const noexcept
 {
 	std::ostringstream oss;
 	oss << "[File] " << file << std::endl << "[Line] " << line;

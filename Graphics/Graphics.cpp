@@ -156,7 +156,7 @@ void Graphics::TurnOffVsync() noexcept
 // Graphics exception stuff
 Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
 	:
-	Exception(line, file),
+	GraphicException(line, file),
 	hr(hr)
 {
 	// join all info messages with newlines into single string
@@ -223,7 +223,7 @@ const char* Graphics::DeviceRemovedException::GetType() const noexcept
 
 Graphics::InfoException::InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept
 	:
-	Exception(line, file)
+	GraphicException(line, file)
 {
 	// join all info messages with newlines into single string
 	for (const auto& m : infoMsgs)

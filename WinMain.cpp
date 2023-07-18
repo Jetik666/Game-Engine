@@ -58,7 +58,7 @@ int CALLBACK WinMain(
 	{
 		return App{}.Go();
 	}
-	catch (const GameException& e)
+	catch (const Exception& e)
 	{
 		MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
 	}

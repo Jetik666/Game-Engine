@@ -189,6 +189,7 @@
     <ClCompile Include="Graphics\Buffers\TransformCbuf.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp" />
     <ClCompile Include="Resources\Model\Pyramid.cpp" />
+    <ClCompile Include="Graphics\Surface\Surface.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +231,7 @@
     <ClInclude Include="Graphics\Shaders\Vertex\VertexShader.h" />
     <ClInclude Include="Graphics\Buffers\TransformCbuf.h" />
     <ClInclude Include="Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Graphics\Surface\Surface.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game Engine.rc" />

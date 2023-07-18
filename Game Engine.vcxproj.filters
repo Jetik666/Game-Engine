@@ -114,6 +114,9 @@
     <ClCompile Include="Resources\Model\Melon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Surface\Surface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\image\icon\manager16.ico">
@@ -226,6 +229,9 @@
     <ClInclude Include="Resources\Model\Melon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Surface\Surface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game Engine.rc">
@@ -244,9 +250,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\HLSL\ColorBlendPS.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorBlendVS.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorIndexPS.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorIndexVS.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorBlendPS_Project.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorBlendVS_Project.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorIndexPS_Project.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorIndexVS_Project.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorBlendPS_Out.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorBlendVS_Out.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorIndexPS_Out.hlsl" />
+    <FxCompile Include="Resources\HLSL\ColorIndexVS_Out.hlsl" />
   </ItemGroup>
 </Project>

@@ -281,7 +281,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 }
 
 // Window Exception Stuff
-std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept
+std::string Window::GraphicException::TranslateErrorCode(HRESULT hr) noexcept
 {
 	char* pMsgBuf = nullptr;
 	// windows will allocate memory for err string and make our pointer point to it
@@ -306,7 +306,7 @@ std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept
 
 Window::HrException::HrException(int line, const char* file, HRESULT hr) noexcept
 	:
-	Exception(line, file),
+	GraphicException(line, file),
 	pHR(hr)
 {}
 
@@ -334,7 +334,7 @@ HRESULT Window::HrException::GetErrorCode() const noexcept
 
 std::string Window::HrException::GetErrorDescription() const noexcept
 {
-	return Exception::TranslateErrorCode(pHR);
+	return GraphicException::TranslateErrorCode(pHR);
 }
 
 

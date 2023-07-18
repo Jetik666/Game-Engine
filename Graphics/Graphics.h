@@ -16,11 +16,11 @@ class Graphics
 {
 	friend class Bindable;
 public:
-	class Exception : public GameException
+	class GraphicException : public Exception
 	{
-		using GameException::GameException;
+		using Exception::Exception;
 	};
-	class HrException : public Exception
+	class HrException : public GraphicException
 	{
 	public:
 		HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs = {}) noexcept;
@@ -34,7 +34,7 @@ public:
 		HRESULT hr;
 		std::string info;
 	};
-	class InfoException : public Exception
+	class InfoException : public GraphicException
 	{
 	public:
 		InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept;

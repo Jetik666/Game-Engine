@@ -12,14 +12,14 @@
 class Window
 {
 public:
-	class Exception : public GameException
+	class GraphicException : public Exception
 	{
-		using GameException::GameException;
+		using Exception::Exception;
 	public:
 		static std::string TranslateErrorCode(HRESULT hr) noexcept;
 	};
 
-	class HrException : public Exception
+	class HrException : public GraphicException
 	{
 	public:
 		HrException(int line, const char* file, HRESULT hr) noexcept;
@@ -31,10 +31,10 @@ public:
 		HRESULT pHR;
 	};
 
-	class NoGfxException : public Exception
+	class NoGfxException : public GraphicException
 	{
 	public:
-		using Exception::Exception;
+		using GraphicException::GraphicException;
 		const char* GetType() const noexcept override;
 	};
 private:

@@ -3,10 +3,10 @@
 #include <exception>
 #include <string>
 
-class GameException : public std::exception
+class Exception : public std::exception
 {
 public:
-	GameException(int line, const char* file) noexcept;
+	Exception(int line, const char* file) noexcept;
 	const char* what() const noexcept override;
 	virtual const char* GetType() const noexcept;
 	int GetLine() const noexcept;
