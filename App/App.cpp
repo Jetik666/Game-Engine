@@ -3,11 +3,17 @@
 #include "../Resources/Model/Box.h"
 #include "../Resources/Model/Melon.h"
 #include "../Resources/Model/Pyramid.h"
+#include "../Resources/Model/Sheet.h"
+#include "../Resources/Model/SkinnedBox.h"
 
 #include "../Resources/Math.h"
+#include "../Graphics/GDI/Surface/Surface.h"
+#include "../Graphics/GDI/GDIPlusManager/GDIPlusManager.h"
 
 #include <memory>
 #include <algorithm>
+
+GDIPlusManager gdipm;
 
 App::App()
 	:
@@ -36,6 +42,14 @@ App::App()
 				return std::make_unique<Melon>(
 					gfx, rng, adist, ddist, odist, rdist, longdist, latdist
 				);
+			case 3:
+				return std::make_unique<Sheet>(
+					gfx, rng, adist, ddist, odist, rdist
+				);
+			case 4:
+				return std::make_unique<SkinnedBox>(
+					gfx, rng, adist, ddist, odist, rdist
+				);
 			default:
 				assert(false && "bad drawable type in factory");
 				return {};
@@ -51,11 +65,10 @@ App::App()
 		std::uniform_real_distribution<float> bdist{0.4f, 3.0f};
 		std::uniform_int_distribution<int> latdist{5, 20};
 		std::uniform_int_distribution<int> longdist{10, 40};
-		std::uniform_int_distribution<int> typedist{0, 2};
+		std::uniform_int_distribution<int> typedist{0, 4};
 	};
-	Factory factory(pWindow.Gfx());
 	pDrawables.reserve(pAmount);
-	std::generate_n(std::back_inserter(pDrawables), pAmount, factory);
+	std::generate_n(std::back_inserter(pDrawables), pAmount, Factory{ pWindow.Gfx() });
 	pWindow.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 40.0f));
 }
 
@@ -108,7 +121,7 @@ void App::DoFrame()
 			pWindow.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
 			for (auto& d : pDrawables)
 			{
-				d->Update(pTimer.GetTimePerFrame());
+				d->Update(pWindow.kbd.KeyIsPressed(VK_SPACE) ? pTimer.GetTimePerFrame() : 0.0f);
 				d->Draw(pWindow.Gfx());
 			}
 			pWindow.Gfx().EndFrame();

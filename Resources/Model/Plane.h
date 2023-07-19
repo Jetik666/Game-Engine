@@ -3,8 +3,8 @@
 #include "../IndexedTriangleList.h"
 #include "../Math.h"
 
-#include <vector>
 #include <array>
+#include <vector>
 
 class Plane
 {
@@ -26,18 +26,18 @@ public:
 			const float side_y = height / 2.0f;
 			const float divisionSize_x = width / float(divisions_x);
 			const float divisionSize_y = height / float(divisions_y);
-			const auto bottomLeft = DiretcX::XMVectorSet(-side_x, -side_y, 0.0f, 0.0f);
+			const auto bottomLeft = DirectX::XMVectorSet(-side_x, -side_y, 0.0f, 0.0f);
 
 			for (int y = 0, i = 0; y < nVertices_y; y++)
 			{
 				const float y_pos = float(y) * divisionSize_y;
 				for (int x = 0; x < nVertices_x; x++, i++)
 				{
-					const auto v = DiretcX::XMVectorAdd(
+					const auto v = DirectX::XMVectorAdd(
 						bottomLeft,
-						DiretcX::XMVectorSet(float(x) * divisionSize_x, y_pos, 0.0f, 0.0f)
+						DirectX::XMVectorSet(float(x) * divisionSize_x, y_pos, 0.0f, 0.0f)
 					);
-					DiretcX::XMStoreFloat3(&vertices[i].pos, v);
+					DirectX::XMStoreFloat3(&vertices[i].pos, v);
 				}
 			}
 		}

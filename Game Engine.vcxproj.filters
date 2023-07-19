@@ -126,10 +126,22 @@
     <ClCompile Include="Graphics\Texture\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Resources\Model\Sheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\Model\SkinnedBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\image\icon\manager16.ico">
+    <Image Include="Resources\icon\manager16.ico">
       <Filter>Resource Files\Image\Icon</Filter>
+    </Image>
+    <Image Include="Resources\Images\cube.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Images\kappa50.png">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +260,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Texture\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Model\Sheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\Model\SkinnedBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

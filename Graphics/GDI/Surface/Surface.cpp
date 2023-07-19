@@ -88,22 +88,24 @@ const Surface::Color* Surface::GetBufferPtrConst() const noexcept
 	return pBuffer.get();
 }
 
-Surface Surface::FromFile(const std::string& name)
+Surface Surface::FromFile(std::string filename)
 {
 	unsigned int width = 0;
 	unsigned int height = 0;
 	std::unique_ptr<Color[]> pBuffer;
 
+	const std::string& path = "Resources" + filename;
+
 	{
 		// Convert filenam to wide string (for Gdiplus)
 		wchar_t wideName[512];
-		mbstowcs_s(nullptr, wideName, name.c_str(), _TRUNCATE);
+		mbstowcs_s(nullptr, wideName, path.c_str(), _TRUNCATE);
 
 		Gdiplus::Bitmap bitmap(wideName);
 		if (bitmap.GetLastStatus() != Gdiplus::Status::Ok)
 		{
 			std::stringstream ss;
-			ss << "Loading image [" << name << "]: failed to load.";
+			ss << "Loading image [" << path << "]: failed to load." << bitmap.GetHeight();
 			throw ColorException(__LINE__, __FILE__, ss.str());
 		}
 
