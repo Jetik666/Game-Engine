@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Exception/Exception.h"
+#include "../../../Exception/Exception.h"
  
 // target Windows 7 or later
 #define _WIN32_WINNT 0x0601

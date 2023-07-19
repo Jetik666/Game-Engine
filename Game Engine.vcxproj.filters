@@ -114,7 +114,16 @@
     <ClCompile Include="Resources\Model\Melon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Surface\Surface.cpp">
+    <ClCompile Include="Graphics\GDI\Surface\Surface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GDI\GDIPlusManager\GDIPlusManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Binding\Sampler\Sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Texture\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -229,7 +238,16 @@
     <ClInclude Include="Resources\Model\Melon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Surface\Surface.h">
+    <ClInclude Include="Graphics\GDI\Surface\Surface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GDI\GDIPlusManager\GDIPlusManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Binding\Sampler\Sampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Texture\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -258,5 +276,9 @@
     <FxCompile Include="Resources\HLSL\ColorBlendVS_Out.hlsl" />
     <FxCompile Include="Resources\HLSL\ColorIndexPS_Out.hlsl" />
     <FxCompile Include="Resources\HLSL\ColorIndexVS_Out.hlsl" />
+    <FxCompile Include="Graphics\Texture\TexturePS_Project.hlsl" />
+    <FxCompile Include="Graphics\Texture\TextureVS_Out.hlsl" />
+    <FxCompile Include="Graphics\Texture\TexturePS_Out.hlsl" />
+    <FxCompile Include="Graphics\Texture\TextureVS_Project.hlsl" />
   </ItemGroup>
 </Project>
