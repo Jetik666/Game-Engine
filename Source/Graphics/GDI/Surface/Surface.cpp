@@ -97,7 +97,7 @@ Surface Surface::FromFile(std::string filename)
 	const std::string& path = "Resources" + filename;
 
 	{
-		// Convert filenam to wide string (for Gdiplus)
+		// Convert filename to wide string (for Gdiplus)
 		wchar_t wideName[512];
 		mbstowcs_s(nullptr, wideName, path.c_str(), _TRUNCATE);
 
@@ -174,7 +174,7 @@ void Surface::Save(const std::string& filename) const
 	GetEncoderClsid(L"image/bmp", &bmpID);
 
 
-	// convert filenam to wide string (for Gdiplus)
+	// Convert filename to wide string (for Gdiplus)
 	wchar_t wideName[512];
 	mbstowcs_s(nullptr, wideName, filename.c_str(), _TRUNCATE);
 
