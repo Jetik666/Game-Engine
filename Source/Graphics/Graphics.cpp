@@ -37,10 +37,10 @@ Graphics::Graphics(HWND hWnd)
 	swapCreateFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-	// for checking results of d3d functions
+	// For checking results of d3d functions
 	HRESULT hr;
 
-	// create device and front/back buffers, and swap chain and rendering context
+	// Create device and front/back buffers, and swap chain and rendering context
 	GFX_THROW_INFO(D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
@@ -56,12 +56,12 @@ Graphics::Graphics(HWND hWnd)
 		&pContext
 	));
 
-	// gain access to texture subresource in swap chain (back buffer)
+	// Gain access to texture subresource in swap chain (back buffer)
 	Microsoft::WRL::ComPtr<ID3D11Resource> pBackBuffer;
 	GFX_THROW_INFO(pSwap->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer));
 	GFX_THROW_INFO(pDevice->CreateRenderTargetView(pBackBuffer.Get(), nullptr, &pTarget));
 
-	// create depth stensil state
+	// Create depth stensil state
 	D3D11_DEPTH_STENCIL_DESC dsDesc = {};
 	dsDesc.DepthEnable = TRUE;
 	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
@@ -69,10 +69,10 @@ Graphics::Graphics(HWND hWnd)
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> pDSState;
 	GFX_THROW_INFO(pDevice->CreateDepthStencilState(&dsDesc, &pDSState));
 
-	// bind depth state
+	// Bind depth state
 	pContext->OMSetDepthStencilState(pDSState.Get(), 1u);
 
-	// create depth stensil texture
+	// Create depth stensil texture
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> pDepthStencil;
 	D3D11_TEXTURE2D_DESC descDepth = {};
 	descDepth.Width = 800u;
@@ -86,7 +86,7 @@ Graphics::Graphics(HWND hWnd)
 	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	GFX_THROW_INFO(pDevice->CreateTexture2D(&descDepth, nullptr, &pDepthStencil));
 
-	// create view of depth stensil texture
+	// Create view of depth stensil texture
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
 	descDSV.Format = DXGI_FORMAT_D32_FLOAT;
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
@@ -95,11 +95,11 @@ Graphics::Graphics(HWND hWnd)
 		pDepthStencil.Get(), &descDSV, &pDSV
 	));
 
-	// bind depth stensil view to OM
+	// Bind depth stensil view to OM
 	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
 
-	// configure viewport
-	D3D11_VIEWPORT vp;
+	// Configure viewport
+	D3D11_VIEWPORT vp = {};
 	vp.Width = 800.0f;
 	vp.Height = 600.0f;
 	vp.MinDepth = 0.0f;
@@ -107,6 +107,8 @@ Graphics::Graphics(HWND hWnd)
 	vp.TopLeftX = 0.0f;
 	vp.TopLeftY = 0.0f;
 	pContext->RSSetViewports(1u, &vp);
+
+	projection = DirectX::XMMatrixPerspectiveLH(0.0f, 0.0f, 0.0f, 0.0f);
 
 	// Init ImGui d3d impl
 	ImGui_ImplDX11_Init(pDevice.Get(), pContext.Get());
@@ -123,6 +125,8 @@ void Graphics::EndFrame()
 #ifndef NDEBUG
 	infoManager.Set();
 #endif
+	// Present:
+	// First value - Vsync
 	if (FAILED(hr = pSwap->Present(0u, 0u)))
 	{
 		if (hr == DXGI_ERROR_DEVICE_REMOVED)
@@ -160,6 +164,7 @@ DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 
 void Graphics::TurnOffVsync() noexcept
 {
+	// First value - Vsync
 	pSwap->Present(1, 1);
 }
 

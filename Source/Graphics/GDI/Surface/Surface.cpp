@@ -40,7 +40,7 @@ Surface::~Surface()
 
 void Surface::Clear(Color fillValue) noexcept
 {
-	memset(pBuffer.get(), fillValue.dword, width * height * sizeof(Color));
+	memset(pBuffer.get(), fillValue.dword, static_cast<size_t>(width) * static_cast<size_t>(height) * sizeof(Color));
 }
 
 void Surface::PutPixel(unsigned int x, unsigned int y, Color color) noexcept(!IS_DEBUG)
@@ -50,7 +50,7 @@ void Surface::PutPixel(unsigned int x, unsigned int y, Color color) noexcept(!IS
 	assert(x < width);
 	assert(y < height);
 
-	pBuffer[y * width + x] = color;
+	pBuffer[static_cast<size_t>(y) * width + static_cast<size_t>(x)] = color;
 }
 
 Surface::Color Surface::GetPixel(unsigned int x, unsigned int y) const noexcept(!IS_DEBUG)
@@ -60,7 +60,7 @@ Surface::Color Surface::GetPixel(unsigned int x, unsigned int y) const noexcept(
 	assert(x < width);
 	assert(y < height);
 
-	return pBuffer[y * width + x];
+	return pBuffer[static_cast<size_t>(y) * width + static_cast<size_t>(x)];
 }
 
 unsigned int Surface::GetWidth() const noexcept
@@ -111,7 +111,7 @@ Surface Surface::FromFile(std::string filename)
 
 		width = bitmap.GetWidth();
 		height = bitmap.GetHeight();
-		pBuffer = std::make_unique<Color[]>(width * height);
+		pBuffer = std::make_unique<Color[]>(static_cast<size_t>(width) * static_cast<size_t>(height));
 
 		for (unsigned int y = 0; y < height; y++)
 		{
@@ -119,7 +119,7 @@ Surface Surface::FromFile(std::string filename)
 			{
 				Gdiplus::Color color;
 				bitmap.GetPixel(x, y, &color);
-				pBuffer[y * width + x] = color.GetValue();
+				pBuffer[static_cast<size_t>(y) * width + static_cast<size_t>(x)] = color.GetValue();
 			}
 		}
 	}
@@ -192,7 +192,7 @@ void Surface::Copy(const Surface& src) noexcept(!IS_DEBUG)
 	assert(width == src.width);
 	assert(height == src.height);
 
-	memcpy(pBuffer.get(), src.pBuffer.get(), width * height * sizeof(Color));
+	memcpy(pBuffer.get(), src.pBuffer.get(), static_cast<size_t>(width) * static_cast<size_t>(height) * sizeof(Color));
 }
 
 Surface::Surface(unsigned int width, unsigned int height, std::unique_ptr<Color[]> pBufferParam) noexcept

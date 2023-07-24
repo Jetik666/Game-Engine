@@ -9,6 +9,7 @@
 #include "../Resources/Math.h"
 #include "../Graphics/GDI/Surface/Surface.h"
 #include "../Graphics/GDI/GDIPlusManager/GDIPlusManager.h"
+#include "../ImGui/Library/imgui.h"
 
 #include <memory>
 #include <algorithm>

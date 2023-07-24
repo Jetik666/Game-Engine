@@ -1,7 +1,8 @@
-#include "Source/App/App.h"
-
 #pragma region __TARGET__
-#define _WIN32_WINNT 0x0601
+#include <winsdkver.h>
+#undef _WIN32_WINNT
+// Windows 7 is minimal required
+#define _WIN32_WINNT _WIN32_WINNT_WIN7
 #include <sdkddkver.h>
 // The following #defines disable a bunch of unused windows stuff. If you 
 // get weird errors when trying to do some windows stuff, try removing some
@@ -46,11 +47,13 @@
 
 #include <Windows.h>
 
+#include "Source/App/App.h"
+
 int CALLBACK WinMain(
-	HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR lCmdLine,
-	int nCmdShow)
+	_In_ HINSTANCE hInstance,
+	_In_opt_ HINSTANCE hPrevInstance,
+	_In_ LPSTR lCmdLine,
+	_In_ int nCmdShow)
 {
 	try
 	{
