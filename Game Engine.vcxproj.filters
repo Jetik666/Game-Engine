@@ -48,224 +48,296 @@
     <ClCompile Include="WinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App\App.cpp">
+    <ClCompile Include="Source\App\App.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="App\Timer\Timer.cpp">
+    <ClCompile Include="Source\App\Timer\Timer.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="App\Window\Window.cpp">
+    <ClCompile Include="Source\App\Window\Window.cpp">
       <Filter>Source Files\App</Filter>
     </ClCompile>
-    <ClCompile Include="Exception\Exception.cpp">
+    <ClCompile Include="Source\Exception\Exception.cpp">
       <Filter>Source Files\Exception</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Graphics.cpp">
+    <ClCompile Include="Source\Graphics\Graphics.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Input Controls\Keyboard.cpp">
+    <ClCompile Include="Source\Input Controls\Keyboard.cpp">
       <Filter>Source Files\Input Controls</Filter>
     </ClCompile>
-    <ClCompile Include="Input Controls\Mouse.cpp">
+    <ClCompile Include="Source\Input Controls\Mouse.cpp">
       <Filter>Source Files\Input Controls</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\DxgiInfoManager\DxgiInfoManager.cpp">
+    <ClCompile Include="Source\Graphics\DxgiInfoManager\DxgiInfoManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Exception\dxerr.cpp">
+    <ClCompile Include="Source\Exception\dxerr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App\Window\WindowsMessageMap.cpp">
+    <ClCompile Include="Source\App\Window\WindowsMessageMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Shaders\Pixel\PixelShader.cpp">
+    <ClCompile Include="Source\Graphics\Shaders\Pixel\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Shaders\Vertex\VertexShader.cpp">
+    <ClCompile Include="Source\Graphics\Shaders\Vertex\VertexShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Drawable\Drawable.cpp">
+    <ClCompile Include="Source\Graphics\Drawable\Drawable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\IndexBuffer.cpp">
+    <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Resources\Model\Box.cpp">
+    <ClCompile Include="Source\Resources\Model\Box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\InputLayout.cpp">
+    <ClCompile Include="Source\Graphics\InputLayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\TransformCbuf.cpp">
+    <ClCompile Include="Source\Graphics\Buffers\TransformCbuf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Buffers\VertexBuffer.cpp">
+    <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Binding\Bindable.cpp">
+    <ClCompile Include="Source\Binding\Bindable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Binding\Topology.cpp">
+    <ClCompile Include="Source\Binding\Topology.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Resources\Model\Pyramid.cpp">
+    <ClCompile Include="Source\Resources\Model\Pyramid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Resources\Model\Melon.cpp">
+    <ClCompile Include="Source\Resources\Model\Melon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GDI\Surface\Surface.cpp">
+    <ClCompile Include="Source\Graphics\GDI\Surface\Surface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GDI\GDIPlusManager\GDIPlusManager.cpp">
+    <ClCompile Include="Source\Graphics\GDI\GDIPlusManager\GDIPlusManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Binding\Sampler\Sampler.cpp">
+    <ClCompile Include="Source\Binding\Sampler\Sampler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Texture\Texture.cpp">
+    <ClCompile Include="Source\Graphics\Texture\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Resources\Model\Sheet.cpp">
+    <ClCompile Include="Source\Resources\Model\Sheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Resources\Model\SkinnedBox.cpp">
+    <ClCompile Include="Source\Resources\Model\SkinnedBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Library\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Library\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Library\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Library\imgui_impl_dx11.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Library\imgui_impl_win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Library\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Library\imgui_widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ImGui\Manager\ImGuiManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception\Binding\Sampler\Sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception\Binding\Bindable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception\Binding\Topology.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Resources\icon\manager16.ico">
+    <Image Include="Source\Resources\icon\manager16.ico">
       <Filter>Resource Files\Image\Icon</Filter>
     </Image>
-    <Image Include="Resources\Images\cube.png">
+    <Image Include="Source\Resources\Images\cube.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Images\kappa50.png">
+    <Image Include="Source\Resources\Images\kappa50.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App\App.h">
+    <ClInclude Include="Source\App\App.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="App\Timer\Timer.h">
+    <ClInclude Include="Source\App\Timer\Timer.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="App\Window\Window.h">
+    <ClInclude Include="Source\App\Window\Window.h">
       <Filter>Header Files\App</Filter>
     </ClInclude>
-    <ClInclude Include="Exception\Exception.h">
+    <ClInclude Include="Source\Exception\Exception.h">
       <Filter>Header Files\Exception</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Graphics.h">
+    <ClInclude Include="Source\Graphics\Graphics.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Input Controls\Keyboard.h">
+    <ClInclude Include="Source\Input Controls\Keyboard.h">
       <Filter>Header Files\Input Controls</Filter>
     </ClInclude>
-    <ClInclude Include="Input Controls\Mouse.h">
+    <ClInclude Include="Source\Input Controls\Mouse.h">
       <Filter>Header Files\Input Controls</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\resource.h">
+    <ClInclude Include="Source\Resources\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\DxgiInfoManager\DxgiInfoManager.h">
+    <ClInclude Include="Source\Graphics\DxgiInfoManager\DxgiInfoManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exception\dxerr.h">
+    <ClInclude Include="Source\Exception\dxerr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="App\Window\WindowsMessageMap.h">
+    <ClInclude Include="Source\App\Window\WindowsMessageMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="App\Window\WindowsThrowMacros.h">
+    <ClInclude Include="Source\App\Window\WindowsThrowMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GraphicsThrowMacros.h">
+    <ClInclude Include="Source\Graphics\GraphicsThrowMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Shaders\Pixel\PixelShader.h">
+    <ClInclude Include="Source\Graphics\Shaders\Pixel\PixelShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Shaders\Vertex\VertexShader.h">
+    <ClInclude Include="Source\Graphics\Shaders\Vertex\VertexShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Drawable\Drawable.h">
+    <ClInclude Include="Source\Graphics\Drawable\Drawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\IndexBuffer.h">
+    <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Box.h">
+    <ClInclude Include="Source\Resources\Model\Box.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\ConstantBuffers.h">
+    <ClInclude Include="Source\Graphics\Buffers\ConstantBuffers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\InputLayout.h">
+    <ClInclude Include="Source\Graphics\InputLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\TransformCbuf.h">
+    <ClInclude Include="Source\Graphics\Buffers\TransformCbuf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Buffers\VertexBuffer.h">
+    <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Drawable\DrawableBase.h">
+    <ClInclude Include="Source\Graphics\Drawable\DrawableBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Binding\Bindable.h">
+    <ClInclude Include="Source\Binding\Bindable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Binding\BindableBase.h">
+    <ClInclude Include="Source\Binding\BindableBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Binding\Topology.h">
+    <ClInclude Include="Source\Binding\Topology.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Math.h">
+    <ClInclude Include="Source\Resources\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Cone.h">
+    <ClInclude Include="Source\Resources\Model\Cone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\IndexedTriangleList.h">
+    <ClInclude Include="Source\Resources\IndexedTriangleList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Cube.h">
+    <ClInclude Include="Source\Resources\Model\Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Plane.h">
+    <ClInclude Include="Source\Resources\Model\Plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Prism.h">
+    <ClInclude Include="Source\Resources\Model\Prism.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Sphere.h">
+    <ClInclude Include="Source\Resources\Model\Sphere.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Pyramid.h">
+    <ClInclude Include="Source\Resources\Model\Pyramid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Melon.h">
+    <ClInclude Include="Source\Resources\Model\Melon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GDI\Surface\Surface.h">
+    <ClInclude Include="Source\Graphics\GDI\Surface\Surface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GDI\GDIPlusManager\GDIPlusManager.h">
+    <ClInclude Include="Source\Graphics\GDI\GDIPlusManager\GDIPlusManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Binding\Sampler\Sampler.h">
+    <ClInclude Include="Source\Binding\Sampler\Sampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Texture\Texture.h">
+    <ClInclude Include="Source\Graphics\Texture\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\Sheet.h">
+    <ClInclude Include="Source\Resources\Model\Sheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\Model\SkinnedBox.h">
+    <ClInclude Include="Source\Resources\Model\SkinnedBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imgui_impl_dx11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imgui_impl_win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imstb_rectpack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Library\imstb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ImGui\Manager\ImGuiManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception\Binding\Topology.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception\Binding\Sampler\Sampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception\Binding\Bindable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception\Binding\BindableBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -275,28 +347,28 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Exception\DXGetErrorDescription.inl">
+    <None Include="Source\Exception\DXGetErrorDescription.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="Exception\DXGetErrorString.inl">
+    <None Include="Source\Exception\DXGetErrorString.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="Exception\DXTrace.inl">
+    <None Include="Source\Exception\DXTrace.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\HLSL\ColorBlendPS_Project.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorBlendVS_Project.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorIndexPS_Project.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorIndexVS_Project.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorBlendPS_Out.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorBlendVS_Out.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorIndexPS_Out.hlsl" />
-    <FxCompile Include="Resources\HLSL\ColorIndexVS_Out.hlsl" />
-    <FxCompile Include="Graphics\Texture\TexturePS_Project.hlsl" />
-    <FxCompile Include="Graphics\Texture\TextureVS_Out.hlsl" />
-    <FxCompile Include="Graphics\Texture\TexturePS_Out.hlsl" />
-    <FxCompile Include="Graphics\Texture\TextureVS_Project.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorBlendPS_Project.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorBlendVS_Project.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorIndexPS_Project.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorIndexVS_Project.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorBlendPS_Out.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorBlendVS_Out.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorIndexPS_Out.hlsl" />
+    <FxCompile Include="Source\Resources\HLSL\ColorIndexVS_Out.hlsl" />
+    <FxCompile Include="Source\Graphics\Texture\TexturePS_Project.hlsl" />
+    <FxCompile Include="Source\Graphics\Texture\TextureVS_Out.hlsl" />
+    <FxCompile Include="Source\Graphics\Texture\TexturePS_Out.hlsl" />
+    <FxCompile Include="Source\Graphics\Texture\TextureVS_Project.hlsl" />
   </ItemGroup>
 </Project>

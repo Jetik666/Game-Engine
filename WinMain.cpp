@@ -1,3 +1,5 @@
+#include "Source/App/App.h"
+
 #pragma region __TARGET__
 #define _WIN32_WINNT 0x0601
 #include <sdkddkver.h>
@@ -43,10 +45,6 @@
 #pragma endregion
 
 #include <Windows.h>
-
-#include "App/App.h"
-
-#include <thread>
 
 int CALLBACK WinMain(
 	HINSTANCE hInstance,

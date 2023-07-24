@@ -2,6 +2,7 @@
 
 #include "Window/Window.h"
 #include "Timer/Timer.h"
+#include "../ImGui/Manager/ImGuiManager.h"
 
 #include <atomic>
 
@@ -22,6 +23,7 @@ private:
 
 	Window pWindow;
 	Timer pTimer;
+	ImGuiManager pImgui;
 
 	// Objects to draw
 	std::vector<std::unique_ptr<class Drawable>> pDrawables;

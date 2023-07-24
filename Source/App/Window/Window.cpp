@@ -1,9 +1,10 @@
 #include "Window.h"
 
-#include <sstream>
-
 #include "../../Resources/resource.h"
+#include "../../ImGui/Library/imgui_impl_win32.h"
 #include "WindowsThrowMacros.h"
+
+#include <sstream>
 
 // Window Class
 Window::WindowClass Window::WindowClass::pWndClass;
@@ -71,12 +72,15 @@ Window::Window(int width, int height, const char* name) noexcept : pWidth(width)
 
 	// Show Window
 	ShowWindow(pHWND, SW_SHOWDEFAULT);
+	// Init ImGui Win32 impl
+	ImGui_ImplWin32_Init(pHWND);
 	// create graphics object
 	pGfx = std::make_unique<Graphics>(pHWND);
 }
 
 Window::~Window()
 {
+	ImGui_ImplWin32_Shutdown();
 	DestroyWindow(pHWND);
 }
 
@@ -159,6 +163,12 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept 
 {
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+	{
+		return true;
+	}
+	const ImGuiIO& imio = ImGui::GetIO();
+
 	switch (msg) {
 	// We dont want the DefProc to handle this message because
 	// We want our destructor to destroy the window, so return 0 instead of break

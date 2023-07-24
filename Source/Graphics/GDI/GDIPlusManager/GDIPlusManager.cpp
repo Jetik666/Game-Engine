@@ -41,15 +41,11 @@
 #define NOIMAGE
 #define NOTAPE
 #endif
-
 #define NOMINMAX
-
 #define STRICT
 
 #include <Windows.h>
-
 #include "GDIPlusManager.h"
-
 #include <algorithm>
 
 namespace Gdiplus
