@@ -10,7 +10,7 @@
 Window::WindowClass Window::WindowClass::pWndClass;
 
 // Register window class
-Window::WindowClass::WindowClass() noexcept : pHINST(GetModuleHandle(nullptr))
+Window::WindowClass::WindowClass() noexcept : pHINST(GetModuleHandle(nullptr)) 
 {
 	WNDCLASSEX wc = { 0 };
 	wc.cbSize = sizeof(wc);
@@ -28,23 +28,23 @@ Window::WindowClass::WindowClass() noexcept : pHINST(GetModuleHandle(nullptr))
 	RegisterClassEx(&wc);
 }
 
-Window::WindowClass::~WindowClass()
+Window::WindowClass::~WindowClass() 
 {
 	UnregisterClass(pWndClassName, GetInstance());
 }
 
-const char* Window::WindowClass::GetName() noexcept
+const char* Window::WindowClass::GetName() noexcept 
 {
 	return pWndClassName;
 }
 
-HINSTANCE Window::WindowClass::GetInstance() noexcept
+HINSTANCE Window::WindowClass::GetInstance() noexcept 
 {
 	return pWndClass.pHINST;
 }
 
 // Window Stuff
-Window::Window(int width, int height, const char* name) : pWidth(width), pHeight(height)
+Window::Window(int width, int height, const char* name) : pWidth(width), pHeight(height) 
 {
 	// Calculate window size based on desired client region size
 	RECT wr{};
@@ -52,7 +52,7 @@ Window::Window(int width, int height, const char* name) : pWidth(width), pHeight
 	wr.right = width + wr.left;
 	wr.top = 100;
 	wr.bottom = height + wr.top;
-	if (AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE) == 0)
+	if (AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE) == 0) 
 	{
 		throw CHWND_LAST_EXCEPT();
 	}
@@ -65,7 +65,7 @@ Window::Window(int width, int height, const char* name) : pWidth(width), pHeight
 		nullptr, nullptr, WindowClass::GetInstance(), this
 	);
 
-	if (pHWND == nullptr)
+	if (pHWND == nullptr) 
 	{
 		throw CHWND_LAST_EXCEPT();
 	}
@@ -78,7 +78,7 @@ Window::Window(int width, int height, const char* name) : pWidth(width), pHeight
 	pGfx = std::make_unique<Graphics>(pHWND);
 }
 
-Window::~Window()
+Window::~Window() 
 {
 	ImGui_ImplWin32_Shutdown();
 	DestroyWindow(pHWND);
@@ -86,13 +86,13 @@ Window::~Window()
 
 void Window::SetTitle(const std::string& title)
 {
-	if (SetWindowText(pHWND, title.c_str()) == 0)
+	if (SetWindowText(pHWND, title.c_str()) == 0) 
 	{
 		throw CHWND_LAST_EXCEPT();
 	}
 }
 
-std::optional<int> Window::ProcessMessages()
+std::optional<int> Window::ProcessMessages() 
 {
 	MSG msg;
 	
@@ -100,9 +100,9 @@ std::optional<int> Window::ProcessMessages()
 	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 	{
 		// Check for quit because peekmessage does not signal this via return val
+		// Return optional wrapping int (arg to PostQuitMessage is in wParam) signals quit
 		if (msg.message == WM_QUIT)
 		{
-			// Return optional wrapping int (arg to PostQuitMessage is in wParam) signals quit
 			return (int)msg.wParam;
 		}
 
@@ -127,7 +127,7 @@ HWND Window::GetHWND()
 
 Graphics& Window::Gfx() 
 {
-	if (!pGfx)
+	if (!pGfx) 
 	{
 		throw CHWND_NOGFX_EXCEPT();
 	}
@@ -153,7 +153,7 @@ LRESULT CALLBACK Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
-LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept 
+LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
 	// Retrieve ptr to window class
 	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
@@ -161,7 +161,7 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 	return pWnd->HandleMsg(hWnd, msg, wParam, lParam);
 }
 
-LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept 
+LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
 	if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
 	{
@@ -169,15 +169,16 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	}
 	const ImGuiIO& imio = ImGui::GetIO();
 
-	switch (msg) {
+	switch (msg)
+	{
+
 	// We dont want the DefProc to handle this message because
 	// We want our destructor to destroy the window, so return 0 instead of break
-	case WM_CLOSE:
+	case WM_CLOSE: 
 	{
 		PostQuitMessage(0);
 		return 0;
 	}
-
 	// Clear keystate when window loses focus to prevent input getting "stuck
 	case WM_KILLFOCUS:
 	{
@@ -185,13 +186,19 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		break;
 	}
 
-	/******** KEYBOARD MESSAGES ********/
 
+
+	/******** KEYBOARD MESSAGES ********/
 	case WM_KEYDOWN:
 	// Syskey commands need to be handled to track ALT key (VK_MENU) and F10
 	case WM_SYSKEYDOWN:
 	{
-		// filter autorepeat
+		// Stifle this keyboard message if imgui wants to capture
+		if (imio.WantCaptureKeyboard)
+		{
+			break;
+		}
+
 		if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled())
 		{
 			kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
@@ -200,21 +207,40 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	}
 
 	case WM_KEYUP:
-	case WM_SYSKEYUP:
+	case WM_SYSKEYUP: 
 	{
+		// Stifle this keyboard message if imgui wants to capture
+		if (imio.WantCaptureKeyboard) 
+		{
+			break;
+		}
+
 		kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
 		break;
 	}
 	case WM_CHAR:
 	{
+		// Stifle this keyboard message if imgui wants to capture
+		if (imio.WantCaptureKeyboard) 
+		{
+			break;
+		}
+
 		kbd.OnChar(static_cast<unsigned char>(wParam));
 		break;
 	}
 
-	/******** MOUSE MESSAGES ********/
 
+
+	/******** MOUSE MESSAGES ********/
 	case WM_MOUSEMOVE: 
 	{
+		// Stifle this mouse message if imgui wants to capture
+		if (imio.WantCaptureMouse) 
+		{
+			break;
+		}
+
 		const POINTS pt = MAKEPOINTS(lParam);
 		// In client region -> log move and log enter + capture mouse (if not previously in window)
 		if (pt.x >= 0 && pt.x < pWidth && pt.y >= 0 && pt.y < pHeight) 
@@ -234,8 +260,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 				mouse.OnMouseMove(pt.x, pt.y);
 			}
 			// Button up -> release capture / log event for leaving
-			else 
-			{
+			else {
 				ReleaseCapture();
 				mouse.OnMouseLeave();
 			}
@@ -244,35 +269,56 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	}
 	case WM_LBUTTONDOWN: 
 	{
+		// Stifle this mouse message if imgui wants to capture
+		if (imio.WantCaptureMouse) 
+		{
+			break;
+		}
+
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_RBUTTONDOWN: 
 	{
+		// Stifle this mouse message if imgui wants to capture
+		if (imio.WantCaptureMouse) 
+		{
+			break;
+		}
+
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightPressed(pt.x, pt.y);
 		break;
 	}
 	case WM_LBUTTONUP: 
 	{
+		// Stifle this mouse message if imgui wants to capture
+		if (imio.WantCaptureMouse) {
+			break;
+		}
+
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnLeftReleased(pt.x, pt.y);
 		// Release mouse if outside of window
-		if (pt.x < 0 || pt.x >= pWidth || pt.y < 0 || pt.y >= pHeight) 
-		{
+		if (pt.x < 0 || pt.x >= pWidth || pt.y < 0 || pt.y >= pHeight) {
 			ReleaseCapture();
 			mouse.OnMouseLeave();
 		}
 		break;
 	}
-	case WM_RBUTTONUP:
+	case WM_RBUTTONUP: 
 	{
+		// Stifle this mouse message if imgui wants to capture
+		if (imio.WantCaptureMouse) 
+		{
+			break;
+		}
+
 		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnRightReleased(pt.x, pt.y);
 		// Release mouse if outside of window
-		if (pt.x < 0 || pt.x >= pWidth || pt.y < 0 || pt.y >= pHeight)
-		{
+		if (pt.x < 0 || pt.x >= pWidth || pt.y < 0 || pt.y >= pHeight) {
 			ReleaseCapture();
 			mouse.OnMouseLeave();
 		}
@@ -280,47 +326,53 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	}
 	case WM_MOUSEWHEEL:
 	{
+		// Stifle this mouse message if imgui wants to capture
+		if (imio.WantCaptureMouse) 
+		{
+			break;
+		}
+
 		const POINTS pt = MAKEPOINTS(lParam);
 		const int delta = GET_WHEEL_DELTA_WPARAM(wParam);
 		mouse.OnWheelDelta(pt.x, pt.y, delta);
 		break;
 	}
+
 	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 // Window Exception Stuff
-std::string Window::GraphicException::TranslateErrorCode(HRESULT hr) noexcept
+std::string Window::GraphicException::TranslateErrorCode(HRESULT hr) noexcept 
 {
 	char* pMsgBuf = nullptr;
-	// windows will allocate memory for err string and make our pointer point to it
+
+	// Windows will allocate memory for err string and make our pointer point to it
 	const DWORD nMsgLen = FormatMessage(
 		FORMAT_MESSAGE_ALLOCATE_BUFFER |
 		FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
 		nullptr, hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		reinterpret_cast<LPSTR>(&pMsgBuf), 0, nullptr
-	);
+		reinterpret_cast<LPSTR>(&pMsgBuf), 0, nullptr);
+
 	// 0 string length returned indicates a failure
-	if (nMsgLen == 0)
+	if (nMsgLen == 0) 
 	{
 		return "Unidentified error code";
 	}
-	// copy error string from windows-allocated buffer to std::string
+
+	// Copy error string from windows-allocated buffer to std::string
 	std::string errorString = pMsgBuf;
-	// free windows buffer
+	// Free windows buffer
 	LocalFree(pMsgBuf);
 	return errorString;
 }
 
 
 Window::HrException::HrException(int line, const char* file, HRESULT hr) noexcept
-	:
-	GraphicException(line, file),
-	pHR(hr)
-{}
+	: GraphicException(line, file), pHR(hr) {}
 
-const char* Window::HrException::what() const noexcept
+const char* Window::HrException::what() const noexcept 
 {
 	std::ostringstream oss;
 	oss << GetType() << std::endl
@@ -329,26 +381,27 @@ const char* Window::HrException::what() const noexcept
 		<< "[Description] " << GetErrorDescription() << std::endl
 		<< GetOriginString();
 	whatBuffer = oss.str();
+
 	return whatBuffer.c_str();
 }
 
-const char* Window::HrException::GetType() const noexcept
+const char* Window::HrException::GetType() const noexcept 
 {
 	return "Chili Window Exception";
 }
 
-HRESULT Window::HrException::GetErrorCode() const noexcept
+HRESULT Window::HrException::GetErrorCode() const noexcept 
 {
 	return pHR;
 }
 
-std::string Window::HrException::GetErrorDescription() const noexcept
+std::string Window::HrException::GetErrorDescription() const noexcept 
 {
 	return GraphicException::TranslateErrorCode(pHR);
 }
 
 
-const char* Window::NoGfxException::GetType() const noexcept
+const char* Window::NoGfxException::GetType() const noexcept 
 {
 	return "Game Window Exception [No Graphics]";
 }

@@ -55,19 +55,19 @@ int CALLBACK WinMain(
 	_In_ LPSTR lCmdLine,
 	_In_ int nCmdShow)
 {
-	try
+	try 
 	{
 		return App{}.Go();
-	}
-	catch (const Exception& e)
+	} 
+	catch (const Exception& e) 
 	{
 		MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
-	}
-	catch (const std::exception& e)
+	} 
+	catch (const std::exception& e) 
 	{
 		MessageBox(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
-	}
-	catch (...)
+	} 
+	catch (...) 
 	{
 		MessageBox(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
 	}

@@ -6,7 +6,7 @@
 
 #include <atomic>
 
-class App
+class App 
 {
 public:
 	// Constructor
@@ -23,7 +23,7 @@ private:
 
 	Window pWindow;
 	Timer pTimer;
-	ImGuiManager pImgui;
+	ImGuiManager pImGui;
 
 	// Objects to draw
 	std::vector<std::unique_ptr<class Drawable>> pDrawables;
