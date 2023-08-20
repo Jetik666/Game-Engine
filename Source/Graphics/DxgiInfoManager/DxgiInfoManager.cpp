@@ -3,8 +3,8 @@
 #include <dxgidebug.h>
 #include <memory>
 
-#include "../../App/Window/Window.h"
-#include "../../App/Window/WindowsThrowMacros.h"
+#include "../../Window/Window.h"
+#include "../../Window/WindowsThrowMacros.h"
 #include "../Graphics.h"
 #include "../GraphicsThrowMacros.h"
 

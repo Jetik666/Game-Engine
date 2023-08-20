@@ -4,10 +4,10 @@
 #include <optional>
 #include <memory>
 
-#include "../../Exception/Exception.h"
-#include "../../Input Controls/Keyboard.h"
-#include "../../Input Controls/Mouse.h"
-#include "../../Graphics/Graphics.h"
+#include "../Exception/Exception.h"
+#include "../Input Controls/Keyboard.h"
+#include "../Input Controls/Mouse.h"
+#include "../Graphics/Graphics.h"
 
 class Window
 {

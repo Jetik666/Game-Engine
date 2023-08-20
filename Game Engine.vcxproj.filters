@@ -45,18 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\App\App.cpp">
-      <Filter>Source Files\App</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\App\Timer\Timer.cpp">
-      <Filter>Source Files\App</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\App\Window\Window.cpp">
-      <Filter>Source Files\App</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Exception\Exception.cpp">
       <Filter>Source Files\Exception</Filter>
     </ClCompile>
@@ -73,9 +61,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Exception\dxerr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\App\Window\WindowsMessageMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Graphics\Shaders\Pixel\PixelShader.cpp">
@@ -156,13 +141,10 @@
     <ClCompile Include="Source\ImGui\Manager\ImGuiManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Exception\Binding\Sampler\Sampler.cpp">
+    <ClCompile Include="Source\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Exception\Binding\Bindable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Exception\Binding\Topology.cpp">
+    <ClCompile Include="Source\Window\WindowsMessageMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -178,15 +160,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\App\App.h">
-      <Filter>Header Files\App</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\App\Timer\Timer.h">
-      <Filter>Header Files\App</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\App\Window\Window.h">
-      <Filter>Header Files\App</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Exception\Exception.h">
       <Filter>Header Files\Exception</Filter>
     </ClInclude>
@@ -206,12 +179,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Exception\dxerr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\App\Window\WindowsMessageMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\App\Window\WindowsThrowMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\GraphicsThrowMacros.h">
@@ -328,16 +295,13 @@
     <ClInclude Include="Source\ImGui\Manager\ImGuiManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exception\Binding\Topology.h">
+    <ClInclude Include="Source\Window\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exception\Binding\Sampler\Sampler.h">
+    <ClInclude Include="Source\Window\WindowsMessageMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exception\Binding\Bindable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Exception\Binding\BindableBase.h">
+    <ClInclude Include="Source\Window\WindowsThrowMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "Window.h"
 
-#include "../../Resources/resource.h"
-#include "../../ImGui/Library/imgui_impl_win32.h"
+#include "../Resources/resource.h"
+#include "../ImGui/Library/imgui_impl_win32.h"
 #include "WindowsThrowMacros.h"
 
 #include <sstream>
